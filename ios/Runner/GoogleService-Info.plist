@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>828807375521-mvq6suog7f7jrcd3omolmb1v4jsh37ho.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.828807375521-mvq6suog7f7jrcd3omolmb1v4jsh37ho</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDTfeWF_4YvCiFdtV11cUfuVg79Aw2uAVU</string>
+	<key>GCM_SENDER_ID</key>
+	<string>828807375521</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>dev.chandujs.webhook-manager</string>
+	<key>PROJECT_ID</key>
+	<string>webhook-manager</string>
+	<key>STORAGE_BUCKET</key>
+	<string>webhook-manager.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:828807375521:ios:3cfdb0c444750e3fd31ee0</string>
+	<key>DATABASE_URL</key>
+	<string>https://webhook-manager.firebaseio.com</string>
+</dict>
+</plist>

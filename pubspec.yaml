@@ -1,5 +1,6 @@
 name: webhook_manager
 description: A new Flutter project.
+# TODO: Android google service integration pending
 
 version: 0.0.1+1
 

@@ -26,11 +26,6 @@ class _FlutterAppState extends State<FlutterApp> {
       theme: StylesConstant.appTheme,
       navigatorKey: Catcher.navigatorKey,
       debugShowCheckedModeBanner: false,
-      navigatorObservers: [
-        // FirebaseAnalyticsObserver(
-        //   analytics: this._analytics,
-        // ),
-      ],
       home: RootPage(),
     );
   }
