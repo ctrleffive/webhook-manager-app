@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 class StylesConstant {
   static const Color primaryColor = Color(0xFF7B71E9);
   static const Color accentColor = Colors.black;
+  static const Color bgColor = Color(0xFFF8F8F8);
 
   static const Color googleColor = Color(0xFF4285F4);
   static const Color facebookColor = Color(0xFF3A549F);
@@ -18,6 +19,7 @@ class StylesConstant {
       color: Colors.transparent,
       brightness: Brightness.light,
     ),
+    scaffoldBackgroundColor: StylesConstant.bgColor,
     brightness: Brightness.light,
     primaryColor: StylesConstant.primaryColor,
     accentColor: StylesConstant.accentColor,
