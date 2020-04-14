@@ -47,8 +47,16 @@ class __ContentState extends State<_Content> {
   Future<void> checkSession(Duration duration) async {
     final bool sessionStatus = await this._service.session;
     Navigator.of(context).pushAndRemoveUntil(
-      MaterialPageRoute(
-        builder: (_) => sessionStatus ? DashPage() : WelcomePage(),
+      PageRouteBuilder(
+        pageBuilder: (BuildContext context, _, __) {
+          return sessionStatus ? DashPage() : WelcomePage();
+        },
+        transitionsBuilder: (_, Animation<double> animation, __, Widget child) {
+          return new FadeTransition(
+            opacity: animation,
+            child: child,
+          );
+        },
       ),
       (_) => false,
     );
@@ -63,8 +71,6 @@ class __ContentState extends State<_Content> {
 
   @override
   Widget build(BuildContext context) {
-    return PageWrap(
-      children: <Widget>[],
-    );
+    return PageWrap();
   }
 }
