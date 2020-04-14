@@ -26,25 +26,37 @@ class PageWrap extends StatelessWidget {
       body: Stack(
         children: <Widget>[
           SafeArea(
-            child: Padding(
-              padding: EdgeInsets.all(20),
-              child: Column(
-                mainAxisAlignment: this.isCentered
-                    ? MainAxisAlignment.spaceBetween
-                    : MainAxisAlignment.start,
-                crossAxisAlignment: this.isCentered
-                    ? CrossAxisAlignment.center
-                    : CrossAxisAlignment.start,
-                children: [
-                  if (this.title != null)
-                    AppTitle(
-                      icon: this.icon,
-                      label: this.title,
-                      isCentered: this.isCentered,
+            child: LayoutBuilder(
+              builder:
+                  (BuildContext context, BoxConstraints viewportConstraints) {
+                return SingleChildScrollView(
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(
+                      minHeight: viewportConstraints.maxHeight,
                     ),
-                  ...this.children,
-                ],
-              ),
+                    child: Padding(
+                      padding: EdgeInsets.all(20),
+                      child: Column(
+                        mainAxisAlignment: this.isCentered
+                            ? MainAxisAlignment.spaceBetween
+                            : MainAxisAlignment.start,
+                        crossAxisAlignment: this.isCentered
+                            ? CrossAxisAlignment.center
+                            : CrossAxisAlignment.start,
+                        children: [
+                          if (this.title != null)
+                            AppTitle(
+                              icon: this.icon,
+                              label: this.title,
+                              isCentered: this.isCentered,
+                            ),
+                          ...this.children,
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              },
             ),
           ),
           StreamBuilder<bool>(
@@ -73,7 +85,7 @@ class PageWrap extends StatelessWidget {
                   ),
                 ),
               );
-            }
+            },
           ),
         ],
       ),
