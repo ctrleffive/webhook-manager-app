@@ -32,7 +32,9 @@ class WelcomePage extends StatelessWidget {
     try {
       final bool termsOk = (await Navigator.of(context).push(
             MaterialPageRoute(
-                builder: (_) => TermsPage(), fullscreenDialog: true),
+              builder: (_) => TermsPage(),
+              fullscreenDialog: true,
+            ),
           )) ??
           false;
       if (termsOk) {
