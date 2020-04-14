@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:webhook_manager/src/services/auth.dart';
+import 'package:webhook_manager/src/services/streams.dart';
 
 import 'package:webhook_manager/src/views/layouts/page_wrap.dart';
 
@@ -38,6 +39,7 @@ class WelcomePage extends StatelessWidget {
           )) ??
           false;
       if (termsOk) {
+        StreamsService.loaderState.sink.add(true);
         await this._authService.guestLogin();
         Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
@@ -45,6 +47,7 @@ class WelcomePage extends StatelessWidget {
           ),
           (_) => false,
         );
+        StreamsService.loaderState.sink.add(false);
       } else {
         throw Exception('You have to agree to our terms first!');
       }
