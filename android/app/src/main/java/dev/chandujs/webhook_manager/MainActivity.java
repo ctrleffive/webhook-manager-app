@@ -1,4 +1,4 @@
-package dev.chandujs.webhook-manager;
+package dev.chandujs.webhookmanager;
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity;
