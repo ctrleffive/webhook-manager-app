@@ -8,6 +8,7 @@ import 'package:webhook_manager/src/views/components/app_title.dart';
 
 class PageWrap extends StatelessWidget {
   final List<Widget> children;
+  final Widget child;
   final String title;
   final IconData icon;
   final bool isCentered;
@@ -18,6 +19,7 @@ class PageWrap extends StatelessWidget {
     Key key,
     this.icon,
     this.title,
+    this.child,
     this.children,
     this.pageView,
     this.bottomNav,
@@ -40,22 +42,34 @@ class PageWrap extends StatelessWidget {
                     ),
                     child: Padding(
                       padding: EdgeInsets.all(20),
-                      child: Column(
-                        mainAxisAlignment: this.isCentered
-                            ? MainAxisAlignment.spaceBetween
-                            : MainAxisAlignment.start,
-                        crossAxisAlignment: this.isCentered
-                            ? CrossAxisAlignment.center
-                            : CrossAxisAlignment.start,
-                        children: [
-                          if (this.title != null)
-                            AppTitle(
-                              icon: this.icon,
-                              label: this.title,
-                              isCentered: this.isCentered,
-                            ),
-                          ...this.children,
-                        ],
+                      child: Builder(
+                        builder: (BuildContext context) {
+                          final List<Widget> newChildren = [];
+                          if (this.child != null) {
+                            newChildren.add(this.child);
+                          } else if (this.children != null) {
+                            newChildren.addAll(this.children);
+                          }
+                          if (this.title != null) {
+                            newChildren.insert(
+                              0,
+                              AppTitle(
+                                icon: this.icon,
+                                label: this.title,
+                                isCentered: this.isCentered,
+                              ),
+                            );
+                          }
+                          return Column(
+                            mainAxisAlignment: this.isCentered
+                                ? MainAxisAlignment.spaceBetween
+                                : MainAxisAlignment.start,
+                            crossAxisAlignment: this.isCentered
+                                ? CrossAxisAlignment.center
+                                : CrossAxisAlignment.start,
+                            children: newChildren,
+                          );
+                        },
                       ),
                     ),
                   ),
