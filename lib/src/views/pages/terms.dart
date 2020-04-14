@@ -15,7 +15,7 @@ class TermsPage extends StatelessWidget {
         Column(
           children: <Widget>[
             Icon(
-              Icons.notifications,
+              Icons.notifications_active,
               size: 100,
               color: StylesConstant.primaryColor,
             ),

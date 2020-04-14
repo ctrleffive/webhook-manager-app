@@ -7,7 +7,7 @@ class NotificationsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return PageWrap(
       isCentered: false,
-      icon: Icons.notifications,
+      icon: Icons.notifications_active,
       title: 'Notifications',
       children: <Widget>[],
     );

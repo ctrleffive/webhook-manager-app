@@ -76,7 +76,7 @@ class _DashPageState extends State<DashPage> {
             onTap: this._animatePage,
             items: [
               BottomNavigationBarItem(
-                icon: Icon(Icons.notifications),
+                icon: Icon(Icons.notifications_active),
                 title: Text('Notifications'),
               ),
               BottomNavigationBarItem(
