@@ -13,7 +13,18 @@ import 'package:webhook_manager/src/views/layouts/page_wrap.dart';
 import 'package:webhook_manager/src/views/pages/dash.dart';
 import 'package:webhook_manager/src/views/pages/welcome.dart';
 
-class FlutterApp extends StatelessWidget {
+class FlutterApp extends StatefulWidget {
+  @override
+  _FlutterAppState createState() => _FlutterAppState();
+}
+
+class _FlutterAppState extends State<FlutterApp> {
+  @override
+  void dispose() {
+    StreamsService.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -26,10 +37,6 @@ class FlutterApp extends StatelessWidget {
 }
 
 class _Content extends StatefulWidget {
-  const _Content({
-    Key key,
-  }) : super(key: key);
-
   @override
   __ContentState createState() => __ContentState();
 }
@@ -45,6 +52,7 @@ class __ContentState extends State<_Content> {
       ),
       (_) => false,
     );
+    StreamsService.loaderState.sink.add(false);
   }
 
   @override
@@ -54,21 +62,9 @@ class __ContentState extends State<_Content> {
   }
 
   @override
-  void dispose() {
-    StreamsService.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return PageWrap(
-      children: <Widget>[
-        SizedBox(),
-        Center(
-          child: CircularProgressIndicator(),
-        ),
-        SizedBox(),
-      ],
+      children: <Widget>[],
     );
   }
 }
