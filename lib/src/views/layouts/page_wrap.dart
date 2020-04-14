@@ -12,7 +12,7 @@ class PageWrap extends StatelessWidget {
   final IconData icon;
   final bool isCentered;
   final PageView pageView;
-  final BottomNavigationBar bottomNav;
+  final Widget bottomNav;
 
   const PageWrap({
     Key key,
