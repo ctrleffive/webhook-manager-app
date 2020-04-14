@@ -10,4 +10,20 @@ class AuthService {
     StreamsService.sessionUser.sink.add(user);
     return user != null;
   }  
+
+  Future<void> signOut() async {
+    try {
+      await this._firebaseAuth.signOut();
+    } catch (e) {
+      throw Exception('Login failed!');
+    }
+  }
+
+  Future<void> guestLogin() async {
+    try {
+      await this._firebaseAuth.signInAnonymously();
+    } catch (e) {
+      throw Exception('Guest login failed!');
+    }
+  }
 }
