@@ -39,7 +39,7 @@ class PageWrap extends StatelessWidget {
                       minHeight: constraints.maxHeight,
                     ),
                     child: Padding(
-                      padding: EdgeInsets.fromLTRB(30, 20, 30, 20),
+                      padding: EdgeInsets.all(20),
                       child: Column(
                         mainAxisAlignment: this.isCentered
                             ? MainAxisAlignment.spaceBetween
