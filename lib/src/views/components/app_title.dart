@@ -18,7 +18,7 @@ class AppTitle extends StatelessWidget {
     final bool canPop = Navigator.of(context).canPop();
 
     return Padding(
-      padding: EdgeInsets.only(bottom: 20),
+      padding: EdgeInsets.only(bottom: 30, top: 10),
       child: Stack(
         children: <Widget>[
           if (canPop)
