@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:webhook_manager/src/services/auth.dart';
 
 import 'package:webhook_manager/src/views/layouts/page_wrap.dart';
 
 import 'package:webhook_manager/src/views/components/button.dart';
 import 'package:webhook_manager/src/views/components/app_logo.dart';
+import 'package:webhook_manager/src/views/pages/dash.dart';
+import 'package:webhook_manager/src/views/pages/terms.dart';
 
 class WelcomePage extends StatelessWidget {
   WelcomePage({Key key}) : super(key: key);
 
+  final AuthService _authService = AuthService();
   final List<_Intro> intros = [
     _Intro(
       image: AppLogo(),
@@ -17,9 +21,40 @@ class WelcomePage extends StatelessWidget {
     _Intro(
       image: AppLogo(isAccent: true),
       title: 'Sample Heading',
-      body: 'lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.',
+      body:
+          'lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.',
     ),
   ];
+
+  Future<void> _emailLogin() async {}
+
+  Future<void> _guestLogin(BuildContext context) async {
+    try {
+      final bool termsOk = (await Navigator.of(context).push(
+            MaterialPageRoute(
+                builder: (_) => TermsPage(), fullscreenDialog: true),
+          )) ??
+          false;
+      if (termsOk) {
+        await this._authService.guestLogin();
+        Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(
+            builder: (_) => DashPage(),
+          ),
+          (_) => false,
+        );
+      } else {
+        throw Exception('You have to agree to our terms first!');
+      }
+    } catch (e) {
+      Scaffold.of(context).showSnackBar(
+        SnackBar(
+          content: Text(e.message),
+          backgroundColor: Colors.redAccent,
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,17 +85,23 @@ class WelcomePage extends StatelessWidget {
             },
           ),
         ),
-        Column(
-          children: <Widget>[
-            Button(
-              label: 'Continue As Guest',
-              isFlat: true,
-            ),
-            Button(
-              label: 'Continue With Email',
-              isBlock: true,
-            ),
-          ],
+        Builder(
+          builder: (BuildContext context) {
+            return Column(
+              children: <Widget>[
+                Button(
+                  label: 'Continue As Guest',
+                  isFlat: true,
+                  onTap: () => this._guestLogin(context),
+                ),
+                Button(
+                  label: 'Continue With Email',
+                  isBlock: true,
+                  onTap: this._emailLogin,
+                ),
+              ],
+            );
+          },
         ),
       ],
     );
