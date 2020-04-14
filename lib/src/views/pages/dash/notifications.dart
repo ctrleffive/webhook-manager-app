@@ -21,6 +21,42 @@ class NotificationsPage extends StatelessWidget {
       method: RequestMethod.put,
       receivedTime: DateTime.now(),
     ),
+    NotificationData(
+        color: Colors.redAccent,
+        eventName: 'build_status',
+        method: RequestMethod.post,
+        receivedTime: DateTime.now(),
+        payload: '{"event_type":"insomnia","client_payload":{}}'),
+    NotificationData(
+      color: Colors.green,
+      eventName: 'event_tester',
+      method: RequestMethod.put,
+      receivedTime: DateTime.now(),
+    ),
+    NotificationData(
+        color: Colors.blue,
+        eventName: 'build_status',
+        method: RequestMethod.post,
+        receivedTime: DateTime.now(),
+        payload: '{"event_type":"insomnia","client_payload":{}}'),
+    NotificationData(
+      color: Colors.green,
+      eventName: 'event_tester',
+      method: RequestMethod.put,
+      receivedTime: DateTime.now(),
+    ),
+    NotificationData(
+        color: Colors.redAccent,
+        eventName: 'build_status',
+        method: RequestMethod.post,
+        receivedTime: DateTime.now(),
+        payload: '{"event_type":"insomnia","client_payload":{}}'),
+    NotificationData(
+      color: Colors.green,
+      eventName: 'event_tester',
+      method: RequestMethod.put,
+      receivedTime: DateTime.now(),
+    ),
   ];
 
   @override
@@ -33,6 +69,7 @@ class NotificationsPage extends StatelessWidget {
         builder: (BuildContext context) {
           return ListView.builder(
             shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
             itemCount: this.items.length,
             itemBuilder: (BuildContext context, int index) {
               return Dismissible(
