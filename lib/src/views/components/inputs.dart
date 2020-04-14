@@ -14,12 +14,15 @@ class TextInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      child: TextFormField(
-        decoration: InputDecoration(
-          labelText: this.label,
-          enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(
-              color: StylesConstant.accentColor,
+      child: Padding(
+        padding: EdgeInsets.only(bottom: 10, top: 10),
+        child: TextFormField(
+          decoration: InputDecoration(
+            labelText: this.label,
+            enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(
+                color: StylesConstant.accentColor,
+              ),
             ),
           ),
         ),

@@ -9,13 +9,24 @@ class AuthService {
     final FirebaseUser user = await this._firebaseAuth.currentUser();
     StreamsService.sessionUser.sink.add(user);
     return user != null;
-  }  
+  }
 
   Future<void> signOut() async {
     try {
       await this._firebaseAuth.signOut();
     } catch (e) {
       throw Exception('Login failed!');
+    }
+  }
+
+  Future<void> emailLogin({String email, String password}) async {
+    try {
+      await this._firebaseAuth.signInWithEmailAndPassword(
+            email: email,
+            password: password,
+          );
+    } catch (e) {
+      throw Exception('Email login failed!');
     }
   }
 

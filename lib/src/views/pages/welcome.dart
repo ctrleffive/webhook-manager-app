@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+
 import 'package:webhook_manager/src/services/auth.dart';
 import 'package:webhook_manager/src/services/streams.dart';
 
 import 'package:webhook_manager/src/views/layouts/page_wrap.dart';
 
+import 'package:webhook_manager/src/views/pages/dash.dart';
+import 'package:webhook_manager/src/views/pages/login.dart';
+import 'package:webhook_manager/src/views/pages/terms.dart';
+
 import 'package:webhook_manager/src/views/components/button.dart';
 import 'package:webhook_manager/src/views/components/app_logo.dart';
-import 'package:webhook_manager/src/views/pages/dash.dart';
-import 'package:webhook_manager/src/views/pages/terms.dart';
 
 class WelcomePage extends StatelessWidget {
   WelcomePage({Key key}) : super(key: key);
@@ -27,7 +30,13 @@ class WelcomePage extends StatelessWidget {
     ),
   ];
 
-  Future<void> _emailLogin() async {}
+  Future<void> _emailLogin(BuildContext context) async {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (_) => LoginPage(),
+      ),
+    );
+  }
 
   Future<void> _guestLogin(BuildContext context) async {
     try {
@@ -102,7 +111,7 @@ class WelcomePage extends StatelessWidget {
                 Button(
                   label: 'Continue With Email',
                   isBlock: true,
-                  onTap: this._emailLogin,
+                  onTap: () => this._emailLogin(context),
                 ),
               ],
             );
