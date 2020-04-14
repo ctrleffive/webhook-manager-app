@@ -18,7 +18,7 @@ class AppTitle extends StatelessWidget {
     final bool canPop = Navigator.of(context).canPop();
 
     return Padding(
-      padding: EdgeInsets.only(bottom: 20),
+      padding: EdgeInsets.only(bottom: 30),
       child: Stack(
         children: <Widget>[
           if (canPop)
@@ -40,8 +40,8 @@ class AppTitle extends StatelessWidget {
               if (this.icon != null) ...[
                 Padding(
                   padding: EdgeInsets.only(
-                    right: 20,
-                    left: (canPop && !this.isCentered) ? 50 : 0,
+                    right: 30,
+                    left: (canPop && !this.isCentered) ? 55 : 0,
                   ),
                   child: Icon(
                     this.icon,
@@ -52,7 +52,7 @@ class AppTitle extends StatelessWidget {
               ],
               Padding(
                 padding: EdgeInsets.only(
-                  left: (canPop && !this.isCentered) ? 50 : 0,
+                  left: (canPop && !this.isCentered) ? 55 : 0,
                 ),
                 child: Text(
                   this.label,

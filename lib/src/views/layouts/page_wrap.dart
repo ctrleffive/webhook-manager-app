@@ -11,12 +11,16 @@ class PageWrap extends StatelessWidget {
   final String title;
   final IconData icon;
   final bool isCentered;
+  final PageView pageView;
+  final BottomNavigationBar bottomNav;
 
   const PageWrap({
     Key key,
     this.icon,
     this.title,
     this.children,
+    this.pageView,
+    this.bottomNav,
     this.isCentered = true,
   }) : super(key: key);
 
@@ -27,15 +31,15 @@ class PageWrap extends StatelessWidget {
         children: <Widget>[
           SafeArea(
             child: LayoutBuilder(
-              builder:
-                  (BuildContext context, BoxConstraints viewportConstraints) {
+              builder: (BuildContext context, BoxConstraints constraints) {
+                if (this.pageView != null) return this.pageView;
                 return SingleChildScrollView(
                   child: ConstrainedBox(
                     constraints: BoxConstraints(
-                      minHeight: viewportConstraints.maxHeight,
+                      minHeight: constraints.maxHeight,
                     ),
                     child: Padding(
-                      padding: EdgeInsets.all(20),
+                      padding: EdgeInsets.fromLTRB(30, 20, 30, 20),
                       child: Column(
                         mainAxisAlignment: this.isCentered
                             ? MainAxisAlignment.spaceBetween
@@ -89,6 +93,7 @@ class PageWrap extends StatelessWidget {
           ),
         ],
       ),
+      bottomNavigationBar: this.bottomNav,
     );
   }
 }
