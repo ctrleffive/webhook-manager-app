@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "828807375521",
+    "firebase_url": "https://webhook-manager.firebaseio.com",
+    "project_id": "webhook-manager",
+    "storage_bucket": "webhook-manager.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:828807375521:android:4291d0aafd3c376cd31ee0",
+        "android_client_info": {
+          "package_name": "dev.chandujs.webhookmanager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "828807375521-sqp0pn44naaj5bmgmp2m87nm384hm2dl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "dev.chandujs.webhookmanager",
+            "certificate_hash": "49555c098b40da8f36edf77b41758cd27f6b1b38"
+          }
+        },
+        {
+          "client_id": "828807375521-s0089tlpns564dq74do8g5ackbcogcp7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbXaa31gS85rdbkarp_VJ06J8owdlBmKY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "828807375521-s0089tlpns564dq74do8g5ackbcogcp7.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "828807375521-eg9rlqt4k09m1l6k7j6d5o0lupack3v6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "dev.chandujs.webhookmanager"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
