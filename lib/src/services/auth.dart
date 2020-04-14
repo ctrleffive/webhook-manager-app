@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:webhook_manager/src/models/gate_user.dart';
 
 import 'package:webhook_manager/src/services/streams.dart';
 
@@ -19,14 +20,30 @@ class AuthService {
     }
   }
 
-  Future<void> emailLogin({String email, String password}) async {
+  Future<void> emailLogin(GateUser user) async {
     try {
       await this._firebaseAuth.signInWithEmailAndPassword(
-            email: email,
-            password: password,
+            email: user.email,
+            password: user.password,
           );
     } catch (e) {
       throw Exception('Email login failed!');
+    }
+  }
+
+  Future<void> emailSignup(GateUser user) async {
+    try {
+      await this._firebaseAuth.createUserWithEmailAndPassword(
+            email: user.email,
+            password: user.password,
+          );
+      final FirebaseUser currentUser = await this._firebaseAuth.currentUser();
+      final UserUpdateInfo userUpdateInfo = UserUpdateInfo();
+      userUpdateInfo.displayName = user.name;
+      await currentUser.updateProfile(userUpdateInfo);
+      await this.session;
+    } catch (e) {
+      throw Exception('Signup failed!');
     }
   }
 

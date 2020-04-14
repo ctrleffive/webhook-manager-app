@@ -4,10 +4,14 @@ import 'package:webhook_manager/src/constants/styles.dart';
 class TextInput extends StatelessWidget {
   final String label;
   final String placeholder;
+  final Function(String) validator;
+  final Function(String) onSave;
 
   TextInput({
     Key key,
     this.label = 'Input Label',
+    this.onSave,
+    this.validator,
     this.placeholder,
   }) : super(key: key);
 
@@ -17,6 +21,8 @@ class TextInput extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.only(bottom: 10, top: 10),
         child: TextFormField(
+          onSaved: this.onSave,
+          validator: this.validator,
           decoration: InputDecoration(
             labelText: this.label,
             enabledBorder: UnderlineInputBorder(
