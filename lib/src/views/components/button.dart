@@ -6,9 +6,11 @@ class Button extends StatelessWidget {
   final String label;
   final bool isFlat;
   final bool isBlock;
+  final Function() onTap;
 
   const Button({
     Key key,
+    this.onTap,
     this.label = 'Button',
     this.isFlat = false,
     this.isBlock = false,
@@ -18,6 +20,7 @@ class Button extends StatelessWidget {
   Widget build(BuildContext context) {
     final Color color = StylesConstant.primaryColor;
     return GestureDetector(
+      onTap: this.onTap,
       child: Container(
         width: this.isBlock ? MediaQuery.of(context).size.width : null,
         padding: EdgeInsets.fromLTRB(30, 20, 30, 20),
