@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:webhook_manager/src/services/auth.dart';
+import 'package:webhook_manager/src/services/streams.dart';
 
 import 'package:webhook_manager/src/views/layouts/page_wrap.dart';
 
@@ -8,7 +9,12 @@ import 'package:webhook_manager/src/views/pages/welcome.dart';
 
 import 'package:webhook_manager/src/views/components/button.dart';
 
-class DashPage extends StatelessWidget {
+class DashPage extends StatefulWidget {
+  @override
+  _DashPageState createState() => _DashPageState();
+}
+
+class _DashPageState extends State<DashPage> {
   final AuthService _authService = AuthService();
 
   Future<void> _signOut(BuildContext context) async {
@@ -19,6 +25,12 @@ class DashPage extends StatelessWidget {
       ),
       (_) => false,
     );
+  }
+
+  @override
+  void initState() {
+    StreamsService.loaderState.sink.add(false);
+    super.initState();
   }
 
   @override
