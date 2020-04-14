@@ -32,6 +32,14 @@ class TermsPage extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
+            Button(
+              label: 'Data Handling Policy',
+              isBlock: true,
+              isFlat: true,
+              onTap: () {
+                // TODO: Open Data Handling Policy URL
+              },
+            ),
           ],
         ),
         SizedBox(),
