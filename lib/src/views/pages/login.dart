@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:webhook_manager/src/views/components/app_logo.dart';
 
 import 'package:webhook_manager/src/views/layouts/page_wrap.dart';
 
+import 'package:webhook_manager/src/views/pages/signup.dart';
+
 import 'package:webhook_manager/src/views/components/button.dart';
 import 'package:webhook_manager/src/views/components/inputs.dart';
+import 'package:webhook_manager/src/views/components/app_logo.dart';
 
 class LoginPage extends StatelessWidget {
   @override
@@ -24,12 +26,7 @@ class LoginPage extends StatelessWidget {
               label: 'Password',
               placeholder: '**********',
             ),
-            SizedBox(height: 20),
-            Button(
-              label: 'Forgot Password',
-              isFlat: true,
-              onTap: () {},
-            ),
+            SizedBox(height: 40),
             Button(
               label: 'Login',
               isBlock: true,
@@ -38,11 +35,21 @@ class LoginPage extends StatelessWidget {
             Button(
               label: 'Signup',
               isFlat: true,
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => SignupPage(),
+                  ),
+                );
+              },
             ),
           ],
         ),
-        SizedBox(),
+        Button(
+          label: 'Forgot Password',
+          isFlat: true,
+          onTap: () {},
+        ),
       ],
     );
   }
