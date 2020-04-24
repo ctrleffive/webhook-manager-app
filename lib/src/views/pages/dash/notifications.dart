@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+
+import 'package:webhook_manager/src/constants/enums.dart';
 import 'package:webhook_manager/src/constants/styles.dart';
 
 import 'package:webhook_manager/src/models/notification.dart';
@@ -10,11 +12,12 @@ import 'package:webhook_manager/src/views/components/notification_item.dart';
 class NotificationsPage extends StatelessWidget {
   final List<NotificationData> items = [
     NotificationData(
-        color: Colors.blue,
-        eventName: 'build_status',
-        method: RequestMethod.post,
-        receivedTime: DateTime.now(),
-        payload: '{"event_type":"insomnia","client_payload":{}}'),
+      color: Colors.blue,
+      eventName: 'build_status',
+      method: RequestMethod.post,
+      receivedTime: DateTime.now(),
+      payload: '{"event_type":"insomnia","client_payload":{}}',
+    ),
     NotificationData(
       color: Colors.green,
       eventName: 'event_tester',
@@ -22,11 +25,12 @@ class NotificationsPage extends StatelessWidget {
       receivedTime: DateTime.now(),
     ),
     NotificationData(
-        color: Colors.redAccent,
-        eventName: 'build_status',
-        method: RequestMethod.post,
-        receivedTime: DateTime.now(),
-        payload: '{"event_type":"insomnia","client_payload":{}}'),
+      color: Colors.redAccent,
+      eventName: 'build_status',
+      method: RequestMethod.post,
+      receivedTime: DateTime.now(),
+      payload: '{"event_type":"insomnia","client_payload":{}}',
+    ),
     NotificationData(
       color: Colors.green,
       eventName: 'event_tester',
@@ -34,11 +38,12 @@ class NotificationsPage extends StatelessWidget {
       receivedTime: DateTime.now(),
     ),
     NotificationData(
-        color: Colors.blue,
-        eventName: 'build_status',
-        method: RequestMethod.post,
-        receivedTime: DateTime.now(),
-        payload: '{"event_type":"insomnia","client_payload":{}}'),
+      color: Colors.blue,
+      eventName: 'build_status',
+      method: RequestMethod.post,
+      receivedTime: DateTime.now(),
+      payload: '{"event_type":"insomnia","client_payload":{}}',
+    ),
     NotificationData(
       color: Colors.green,
       eventName: 'event_tester',
@@ -46,11 +51,12 @@ class NotificationsPage extends StatelessWidget {
       receivedTime: DateTime.now(),
     ),
     NotificationData(
-        color: Colors.redAccent,
-        eventName: 'build_status',
-        method: RequestMethod.post,
-        receivedTime: DateTime.now(),
-        payload: '{"event_type":"insomnia","client_payload":{}}'),
+      color: Colors.redAccent,
+      eventName: 'build_status',
+      method: RequestMethod.post,
+      receivedTime: DateTime.now(),
+      payload: '{"event_type":"insomnia","client_payload":{}}',
+    ),
     NotificationData(
       color: Colors.green,
       eventName: 'event_tester',

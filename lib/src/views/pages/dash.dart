@@ -48,13 +48,14 @@ class _DashPageState extends State<DashPage> {
 
   @override
   Widget build(BuildContext context) {
+    final bool isGuest = StreamsService.sessionUser.value.isAnonymous;
     return PageWrap(
       pageView: PageView(
         controller: this._pageController,
         onPageChanged: this._bottomNav.sink.add,
         children: <Widget>[
-          NotificationsPage(),
           OutgoingPage(),
+          if (!isGuest) NotificationsPage(),
           IncomingPage(),
           SettingsPage(),
         ],
@@ -76,13 +77,14 @@ class _DashPageState extends State<DashPage> {
             onTap: this._animatePage,
             items: [
               BottomNavigationBarItem(
-                icon: Icon(Icons.notifications_active),
-                title: Text('Notifications'),
-              ),
-              BottomNavigationBarItem(
                 icon: Icon(Icons.cloud_upload),
                 title: Text('Outgoing'),
               ),
+              if (!isGuest)
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.notifications_active),
+                  title: Text('Notifications'),
+                ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.cloud_download),
                 title: Text('Incoming'),

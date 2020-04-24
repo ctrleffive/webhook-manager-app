@@ -26,6 +26,7 @@ class AuthService {
             email: user.email,
             password: user.password,
           );
+      await this.session;
     } catch (e) {
       throw Exception('Email login failed!');
     }
@@ -50,6 +51,7 @@ class AuthService {
   Future<void> guestLogin() async {
     try {
       await this._firebaseAuth.signInAnonymously();
+      await this.session;
     } catch (e) {
       throw Exception('Guest login failed!');
     }

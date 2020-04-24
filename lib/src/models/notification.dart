@@ -1,14 +1,7 @@
 import 'dart:convert';
 import 'dart:ui';
 
-enum RequestMethod {
-  get,
-  put,
-  post,
-  patch,
-  delete,
-  option,
-}
+import 'package:webhook_manager/src/constants/enums.dart';
 
 class NotificationData {
   Color color;

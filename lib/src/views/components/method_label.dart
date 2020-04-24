@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:webhook_manager/src/models/notification.dart';
+import 'package:webhook_manager/src/constants/enums.dart';
 
 class MethodLabel extends StatelessWidget {
   final RequestMethod method;
