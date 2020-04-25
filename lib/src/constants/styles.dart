@@ -11,6 +11,15 @@ class StylesConstant {
   static const Color googleColor = Color(0xFF4285F4);
   static const Color facebookColor = Color(0xFF3A549F);
 
+  static const List<Color> requestColors = [
+    Colors.yellowAccent, // get
+    Colors.cyan, // put
+    Colors.greenAccent, // post
+    Colors.lightBlueAccent, // patch
+    Colors.redAccent, // delete
+    Colors.white, // option
+  ];
+
   static const double paddingSide = 20;
 
   static final ThemeData appTheme = ThemeData(

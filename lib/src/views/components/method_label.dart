@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:webhook_manager/src/constants/enums.dart';
+import 'package:webhook_manager/src/constants/styles.dart';
 
 class MethodLabel extends StatelessWidget {
   final RequestMethod method;
@@ -9,53 +10,14 @@ class MethodLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String name;
-    Color color;
-
-    switch (this.method) {
-      case RequestMethod.get:
-        color = Colors.cyan;
-        name = 'GET';
-        break;
-
-      case RequestMethod.post:
-        color = Colors.greenAccent;
-        name = 'POST';
-        break;
-
-      case RequestMethod.patch:
-        color = Colors.yellowAccent;
-        name = 'PATCH';
-        break;
-
-      case RequestMethod.delete:
-        color = Colors.redAccent;
-        name = 'DELETE';
-        break;
-
-      case RequestMethod.option:
-        color = Colors.white;
-        name = 'OPTION';
-        break;
-
-      case RequestMethod.put:
-        color = Colors.lightBlueAccent;
-        name = 'PUT';
-        break;
-
-      default:
-        color = Colors.grey;
-        name = 'UNKNOWN';
-    }
-
     return Container(
       padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
       decoration: BoxDecoration(
-        color: color,
+        color: StylesConstant.requestColors[this.method.index],
         borderRadius: BorderRadius.circular(5),
       ),
       child: Text(
-        name,
+        this.method.toString().replaceAll('RequestMethod.', '').toUpperCase(),
         style: TextStyle(
           fontWeight: FontWeight.bold,
           letterSpacing: 2,
