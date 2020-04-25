@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 
 import 'package:intl/intl.dart';
+import 'package:webhook_manager/src/constants/styles.dart';
 
 import 'package:webhook_manager/src/models/notification.dart';
 
@@ -18,11 +19,11 @@ class NotificationItem extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(bottom: 20),
       decoration: BoxDecoration(
-        color: this.data.color,
+        color: Colors.white,
         borderRadius: BorderRadius.circular(10),
         boxShadow: [
           BoxShadow(
-            color: Colors.black12,
+            color: Colors.black.withOpacity(0.05),
             offset: Offset(0, 8),
             blurRadius: 10,
           ),
@@ -44,7 +45,7 @@ class NotificationItem extends StatelessWidget {
                       DateFormat('MMM d y - h:mm a')
                           .format(this.data.receivedTime),
                       style: TextStyle(
-                        color: Colors.white60,
+                        color: StylesConstant.accentColor.withOpacity(0.6),
                       ),
                     ),
                   ],
@@ -53,7 +54,7 @@ class NotificationItem extends StatelessWidget {
                 Text(
                   this.data.eventName,
                   style: TextStyle(
-                    color: Colors.white,
+                    color: StylesConstant.accentColor,
                   ),
                   textScaleFactor: 1.5,
                 ),
@@ -65,7 +66,7 @@ class NotificationItem extends StatelessWidget {
               width: MediaQuery.of(context).size.width,
               padding: EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: Colors.grey.shade900.withOpacity(0.8),
+                color: StylesConstant.accentColor.withOpacity(0.02),
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(10),
                   bottomRight: Radius.circular(10),
@@ -79,7 +80,7 @@ class NotificationItem extends StatelessWidget {
                   return Text(
                     prettyprint,
                     style: TextStyle(
-                      color: Colors.yellow,
+                      color: StylesConstant.accentColor,
                     ),
                   );
                 },
