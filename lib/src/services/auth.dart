@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:webhook_manager/src/models/gate_user.dart';
+
+import 'package:webhook_manager/src/models/user.dart';
 
 import 'package:webhook_manager/src/services/streams.dart';
 
@@ -20,7 +21,7 @@ class AuthService {
     }
   }
 
-  Future<void> emailLogin(GateUser user) async {
+  Future<void> emailLogin(UserData user) async {
     try {
       await this._firebaseAuth.signInWithEmailAndPassword(
             email: user.email,
@@ -32,7 +33,7 @@ class AuthService {
     }
   }
 
-  Future<void> emailSignup(GateUser user) async {
+  Future<void> emailSignup(UserData user) async {
     try {
       await this._firebaseAuth.createUserWithEmailAndPassword(
             email: user.email,

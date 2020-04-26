@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-import 'package:webhook_manager/src/models/gate_user.dart';
+import 'package:webhook_manager/src/models/user.dart';
 
 import 'package:webhook_manager/src/services/auth.dart';
 import 'package:webhook_manager/src/services/streams.dart';
 import 'package:webhook_manager/src/services/validators.dart';
 
 import 'package:webhook_manager/src/views/layouts/page_wrap.dart';
-import 'package:webhook_manager/src/views/pages/dash.dart';
 
+import 'package:webhook_manager/src/views/pages/dash.dart';
 import 'package:webhook_manager/src/views/pages/signup.dart';
 
 import 'package:webhook_manager/src/views/components/button.dart';
@@ -18,7 +18,7 @@ import 'package:webhook_manager/src/views/components/app_logo.dart';
 class LoginPage extends StatelessWidget {
   final AuthService _service = AuthService();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final GateUser _gateUser = GateUser();
+  final UserData _gateUser = UserData();
 
   Future<void> _login(BuildContext context) async {
     try {

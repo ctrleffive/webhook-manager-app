@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:webhook_manager/src/models/gate_user.dart';
+import 'package:webhook_manager/src/models/user.dart';
 
 import 'package:webhook_manager/src/services/auth.dart';
 import 'package:webhook_manager/src/services/streams.dart';
@@ -18,7 +18,7 @@ import 'package:webhook_manager/src/views/components/app_logo.dart';
 class SignupPage extends StatelessWidget {
   final AuthService _service = AuthService();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final GateUser _gateUser = GateUser();
+  final UserData _gateUser = UserData();
 
   Future<void> _signUp(BuildContext context) async {
     try {
