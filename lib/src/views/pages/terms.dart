@@ -10,8 +10,8 @@ class TermsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return PageWrap(
       title: 'Terms',
+      isCentered: true,
       children: <Widget>[
-        SizedBox(),
         Column(
           children: <Widget>[
             Icon(

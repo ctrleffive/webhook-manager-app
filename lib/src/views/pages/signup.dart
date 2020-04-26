@@ -60,6 +60,7 @@ class SignupPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return PageWrap(
       title: 'Signup',
+      isCentered: true,
       children: <Widget>[
         Column(
           children: <Widget>[

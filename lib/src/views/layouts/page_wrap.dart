@@ -12,6 +12,7 @@ class PageWrap extends StatelessWidget {
   final String title;
   final IconData icon;
   final bool noLoader;
+  final bool isCentered;
   final PageView pageView;
   final Widget bottomNav;
 
@@ -22,6 +23,7 @@ class PageWrap extends StatelessWidget {
     this.child,
     this.children,
     this.pageView,
+    this.isCentered = false,
     this.noLoader = false,
     this.bottomNav,
   }) : super(key: key);
@@ -60,7 +62,7 @@ class PageWrap extends StatelessWidget {
                             );
                           }
                           return Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: this.isCentered ? MainAxisAlignment.spaceBetween : MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: newChildren,
                           );

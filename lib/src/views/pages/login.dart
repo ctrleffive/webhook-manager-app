@@ -49,6 +49,7 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return PageWrap(
       title: 'Login',
+      isCentered: true,
       children: <Widget>[
         Column(
           children: <Widget>[
