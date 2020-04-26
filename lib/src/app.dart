@@ -5,6 +5,7 @@ import 'package:catcher/core/catcher.dart';
 
 import 'package:webhook_manager/src/constants/styles.dart';
 
+import 'package:webhook_manager/src/services/sync.dart';
 import 'package:webhook_manager/src/services/auth.dart';
 import 'package:webhook_manager/src/services/streams.dart';
 
@@ -43,6 +44,7 @@ class _Content extends StatefulWidget {
 
 class __ContentState extends State<_Content> {
   final AuthService _service = AuthService();
+  final SyncService _syncService = SyncService();
 
   Future<void> checkSession(Duration duration) async {
     final bool sessionStatus = await this._service.session;
@@ -61,6 +63,7 @@ class __ContentState extends State<_Content> {
       (_) => false,
     );
     StreamsService.loaderState.sink.add(false);
+    this._syncService.init();
   }
 
   @override

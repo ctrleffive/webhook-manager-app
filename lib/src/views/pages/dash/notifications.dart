@@ -1,82 +1,30 @@
 import 'package:flutter/material.dart';
 
-import 'package:webhook_manager/src/constants/enums.dart';
 import 'package:webhook_manager/src/constants/styles.dart';
 
 import 'package:webhook_manager/src/models/notification.dart';
+
+import 'package:webhook_manager/src/services/streams.dart';
 
 import 'package:webhook_manager/src/views/layouts/page_wrap.dart';
 
 import 'package:webhook_manager/src/views/components/notification_item.dart';
 
 class NotificationsPage extends StatelessWidget {
-  final List<NotificationData> items = [
-    NotificationData(
-      id: 1,
-      eventName: 'build_status',
-      method: RequestMethod.post,
-      receivedTime: DateTime.now(),
-      payload: '{"event_type":"insomnia","client_payload":{}}',
-    ),
-    NotificationData(
-      id: 2,
-      eventName: 'event_tester',
-      method: RequestMethod.put,
-      receivedTime: DateTime.now(),
-    ),
-    NotificationData(
-      id: 3,
-      eventName: 'build_status',
-      method: RequestMethod.post,
-      receivedTime: DateTime.now(),
-      payload: '{"event_type":"insomnia","client_payload":{}}',
-    ),
-    NotificationData(
-      id: 4,
-      eventName: 'event_tester',
-      method: RequestMethod.put,
-      receivedTime: DateTime.now(),
-    ),
-    NotificationData(
-      id: 5,
-      eventName: 'build_status',
-      method: RequestMethod.post,
-      receivedTime: DateTime.now(),
-      payload: '{"event_type":"insomnia","client_payload":{}}',
-    ),
-    NotificationData(
-      id: 6,
-      eventName: 'event_tester',
-      method: RequestMethod.put,
-      receivedTime: DateTime.now(),
-    ),
-    NotificationData(
-      id: 7,
-      eventName: 'build_status',
-      method: RequestMethod.post,
-      receivedTime: DateTime.now(),
-      payload: '{"event_type":"insomnia","client_payload":{}}',
-    ),
-    NotificationData(
-      id: 8,
-      eventName: 'event_tester',
-      method: RequestMethod.put,
-      receivedTime: DateTime.now(),
-    ),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return PageWrap(
       icon: Icons.notifications_active,
       title: 'Notifications',
       noLoader: true,
-      child: Builder(
-        builder: (BuildContext context) {
+      child: StreamBuilder<List<NotificationData>>(
+        stream: StreamsService.notifications,
+        initialData: StreamsService.notifications.value,
+        builder: (_, AsyncSnapshot<List<NotificationData>> snapshot) {
           return ListView.builder(
             shrinkWrap: true,
             physics: NeverScrollableScrollPhysics(),
-            itemCount: this.items.length,
+            itemCount: snapshot.data.length,
             itemBuilder: (BuildContext context, int index) {
               return Dismissible(
                 key: Key('dis$index'),
@@ -107,7 +55,7 @@ class NotificationsPage extends StatelessWidget {
                   ),
                 ),
                 direction: DismissDirection.endToStart,
-                child: NotificationItem(this.items[index]),
+                child: NotificationItem(snapshot.data[index]),
               );
             },
           );
