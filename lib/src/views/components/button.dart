@@ -6,10 +6,12 @@ class Button extends StatelessWidget {
   final String label;
   final bool isFlat;
   final bool isBlock;
+  final Color color;
   final Function() onTap;
 
   const Button({
     Key key,
+    this.color,
     this.onTap,
     this.label = 'Button',
     this.isFlat = false,
@@ -18,7 +20,7 @@ class Button extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color color = StylesConstant.primaryColor;
+    final Color color = this.color ?? StylesConstant.primaryColor;
     return GestureDetector(
       onTap: this.onTap,
       child: Container(
