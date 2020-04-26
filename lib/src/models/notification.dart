@@ -19,6 +19,18 @@ class NotificationData {
     this.method,
   });
 
+  static const String tableName = 'notification';
+  static const String tableSchema = '''
+    CREATE TABLE $tableName (
+      id            INTEGER PRIMARY KEY,
+      method        TEXT,
+      headers       TEXT,
+      payload       TEXT,
+      eventName     TEXT,
+      receivedTime  TEXT
+    )
+  ''';
+
   Map<String, dynamic> toMap() {
     return {
       'id': id,

@@ -17,6 +17,17 @@ class OutgoingData {
     this.method,
   });
 
+  static const String tableName = 'outgoing';
+  static const String tableSchema = '''
+    CREATE TABLE $tableName (
+      id            INTEGER PRIMARY KEY,
+      url           TEXT,
+      method        TEXT,
+      payload       TEXT,
+      eventName     TEXT
+    )
+  ''';
+
   Map<String, dynamic> toMap() {
     return {
       'id': id,

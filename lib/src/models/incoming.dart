@@ -8,6 +8,14 @@ class IncomingData {
     this.eventName,
   });
 
+  static const String tableName = 'incoming';
+  static const String tableSchema = '''
+    CREATE TABLE $tableName (
+      id            INTEGER PRIMARY KEY,
+      eventName     TEXT
+    )
+  ''';
+
   Map<String, dynamic> toMap() {
     return {
       'id': id,
