@@ -70,6 +70,7 @@ class OutgoingPage extends StatelessWidget {
       isCentered: false,
       icon: Icons.cloud_upload,
       title: 'Outgoing',
+      noLoader: true,
       child: Builder(
         builder: (BuildContext context) {
           return ListView.builder(

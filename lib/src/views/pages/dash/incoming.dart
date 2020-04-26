@@ -9,6 +9,7 @@ class IncomingPage extends StatelessWidget {
       isCentered: false,
       icon: Icons.cloud_download,
       title: 'Incoming',
+      noLoader: true,
       children: <Widget>[],
     );
   }

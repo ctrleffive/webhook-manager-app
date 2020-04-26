@@ -71,6 +71,7 @@ class NotificationsPage extends StatelessWidget {
       isCentered: false,
       icon: Icons.notifications_active,
       title: 'Notifications',
+      noLoader: true,
       child: Builder(
         builder: (BuildContext context) {
           return ListView.builder(

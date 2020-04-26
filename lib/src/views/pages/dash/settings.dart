@@ -26,6 +26,7 @@ class SettingsPage extends StatelessWidget {
       isCentered: false,
       icon: Icons.settings,
       title: 'Settings',
+      noLoader: true,
       children: <Widget>[
         Button(
           isBlock: true,
