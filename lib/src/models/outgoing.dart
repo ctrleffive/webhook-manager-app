@@ -1,11 +1,9 @@
 import 'dart:convert';
-import 'dart:ui';
 
 import 'package:webhook_manager/src/constants/enums.dart';
 
 class OutgoingData {
   int id;
-  Color color;
   String eventName;
   String payload;
   String url;
@@ -13,7 +11,6 @@ class OutgoingData {
   
   OutgoingData({
     this.id,
-    this.color,
     this.eventName,
     this.payload,
     this.url,
@@ -23,7 +20,6 @@ class OutgoingData {
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'color': color?.value,
       'eventName': eventName,
       'payload': payload,
       'payload': url,
@@ -36,7 +32,6 @@ class OutgoingData {
   
     return OutgoingData(
       id: map['id'],
-      color: Color(map['color']),
       eventName: map['eventName'],
       payload: map['payload'],
       url: map['url'],

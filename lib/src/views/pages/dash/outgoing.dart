@@ -12,7 +12,6 @@ class OutgoingPage extends StatelessWidget {
   final List<OutgoingData> items = [
     OutgoingData(
       id: 1,
-      color: Colors.blue,
       eventName: 'build_status',
       method: RequestMethod.post,
       url: 'https://api.google.com/v1/send_fcm',
@@ -20,14 +19,12 @@ class OutgoingPage extends StatelessWidget {
     ),
     OutgoingData(
       id: 2,
-      color: Colors.green,
       eventName: 'event_tester',
       method: RequestMethod.put,
       url: 'https://api.google.com/v1/send_fcm',
     ),
     OutgoingData(
       id: 3,
-      color: Colors.redAccent,
       eventName: 'build_status',
       method: RequestMethod.post,
       url: 'https://api.google.com/v1/send_fcm',
@@ -35,14 +32,12 @@ class OutgoingPage extends StatelessWidget {
     ),
     OutgoingData(
       id: 4,
-      color: Colors.green,
       eventName: 'event_tester',
       method: RequestMethod.put,
       url: 'https://api.google.com/v1/send_fcm',
     ),
     OutgoingData(
       id: 5,
-      color: Colors.blue,
       eventName: 'build_status',
       method: RequestMethod.post,
       url: 'https://api.google.com/v1/send_fcm',
@@ -50,14 +45,12 @@ class OutgoingPage extends StatelessWidget {
     ),
     OutgoingData(
       id: 6,
-      color: Colors.green,
       eventName: 'event_tester',
       method: RequestMethod.put,
       url: 'https://api.google.com/v1/send_fcm',
     ),
     OutgoingData(
       id: 7,
-      color: Colors.redAccent,
       eventName: 'build_status',
       method: RequestMethod.post,
       url: 'https://api.google.com/v1/send_fcm',
@@ -65,7 +58,6 @@ class OutgoingPage extends StatelessWidget {
     ),
     OutgoingData(
       id: 8,
-      color: Colors.green,
       eventName: 'event_tester',
       method: RequestMethod.put,
       url: 'https://api.google.com/v1/send_fcm',
