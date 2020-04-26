@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:webhook_manager/src/constants/styles.dart';
 
+import 'package:webhook_manager/src/services/streams.dart';
+
 class AppTitle extends StatelessWidget {
   final String label;
   final IconData icon;
@@ -39,10 +41,25 @@ class AppTitle extends StatelessWidget {
                   padding: EdgeInsets.only(
                     right: 20,
                   ),
-                  child: Icon(
-                    this.icon,
-                    size: 30,
-                    color: StylesConstant.primaryColor,
+                  child: StreamBuilder<bool>(
+                    stream: StreamsService.syncState,
+                    initialData: StreamsService.syncState.value,
+                    builder: (_, AsyncSnapshot<bool> snapshot) {
+                      if (snapshot.data) {
+                        return SizedBox(
+                          width: 30,
+                          height: 30,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 2,
+                          ),
+                        );
+                      }
+                      return Icon(
+                        this.icon,
+                        size: 30,
+                        color: StylesConstant.primaryColor,
+                      );
+                    },
                   ),
                 ),
               ],
