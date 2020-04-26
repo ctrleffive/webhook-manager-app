@@ -8,6 +8,8 @@ import 'package:webhook_manager/src/services/streams.dart';
 
 import 'package:webhook_manager/src/views/layouts/page_wrap.dart';
 
+import 'package:webhook_manager/src/views/pages/incoming_new.dart';
+import 'package:webhook_manager/src/views/pages/outgoing_new.dart';
 import 'package:webhook_manager/src/views/pages/dash/incoming.dart';
 import 'package:webhook_manager/src/views/pages/dash/outgoing.dart';
 import 'package:webhook_manager/src/views/pages/dash/settings.dart';
@@ -55,10 +57,37 @@ class _DashPageState extends State<DashPage> {
         onPageChanged: this._bottomNav.sink.add,
         children: <Widget>[
           OutgoingPage(),
-          if (!isGuest) NotificationsPage(),
           IncomingPage(),
+          if (!isGuest) NotificationsPage(),
           SettingsPage(),
         ],
+      ),
+      floatingActionButton: StreamBuilder<int>(
+        stream: this._bottomNav,
+        initialData: this._bottomNav.value,
+        builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
+          return Visibility(
+            visible: snapshot.data == 0 || snapshot.data == 1,
+            child: FloatingActionButton(
+              child: Icon(Icons.add),
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) {
+                      if (snapshot.data == 0) {
+                        return OutgoingNew();
+                      } else {
+                        return IncomingNew();
+                      }
+                    },
+                  ),
+                );
+              },
+              elevation: 0,
+              backgroundColor: StylesConstant.primaryColor,
+            ),
+          );
+        },
       ),
       bottomNav: StreamBuilder<int>(
         stream: this._bottomNav,
@@ -80,15 +109,15 @@ class _DashPageState extends State<DashPage> {
                 icon: Icon(Icons.cloud_upload),
                 title: Text('Outgoing'),
               ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.cloud_download),
+                title: Text('Incoming'),
+              ),
               if (!isGuest)
                 BottomNavigationBarItem(
                   icon: Icon(Icons.notifications_active),
                   title: Text('Notifications'),
                 ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.cloud_download),
-                title: Text('Incoming'),
-              ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.settings),
                 title: Text('Settings'),

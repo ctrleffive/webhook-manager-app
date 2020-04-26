@@ -13,6 +13,7 @@ class PageWrap extends StatelessWidget {
   final bool isCentered;
   final PageView pageView;
   final Widget bottomNav;
+  final Widget floatingActionButton;
 
   const PageWrap({
     Key key,
@@ -24,6 +25,7 @@ class PageWrap extends StatelessWidget {
     this.isCentered = false,
     this.noLoader = false,
     this.bottomNav,
+    this.floatingActionButton,
   }) : super(key: key);
 
   @override
@@ -73,6 +75,7 @@ class PageWrap extends StatelessWidget {
             ),
           ),
           bottomNavigationBar: this.bottomNav,
+          floatingActionButton: this.floatingActionButton,
         ),
         if (!this.noLoader)
           StreamBuilder<bool>(
