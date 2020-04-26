@@ -68,7 +68,6 @@ class NotificationsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PageWrap(
-      isCentered: false,
       icon: Icons.notifications_active,
       title: 'Notifications',
       noLoader: true,

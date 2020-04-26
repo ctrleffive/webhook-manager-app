@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
+
 import 'package:webhook_manager/src/constants/styles.dart';
 
 class AppTitle extends StatelessWidget {
   final String label;
   final IconData icon;
-  final bool isCentered;
 
   AppTitle({
     Key key,
     this.icon,
-    this.isCentered,
     this.label = 'App Title',
   }) : super(key: key);
 
@@ -33,15 +32,12 @@ class AppTitle extends StatelessWidget {
               ),
             ),
           Row(
-            mainAxisAlignment: this.isCentered
-                ? MainAxisAlignment.center
-                : MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               if (this.icon != null) ...[
                 Padding(
                   padding: EdgeInsets.only(
                     right: 20,
-                    left: (canPop && !this.isCentered) ? 50 : 0,
                   ),
                   child: Icon(
                     this.icon,
@@ -50,18 +46,13 @@ class AppTitle extends StatelessWidget {
                   ),
                 ),
               ],
-              Padding(
-                padding: EdgeInsets.only(
-                  left: (canPop && !this.isCentered) ? 50 : 0,
-                ),
-                child: Text(
-                  this.label,
-                  style: Theme.of(context).textTheme.title.copyWith(
-                        color: StylesConstant.accentColor,
-                        fontWeight: FontWeight.w600,
-                      ),
-                  textScaleFactor: 1.1,
-                ),
+              Text(
+                this.label,
+                style: Theme.of(context).textTheme.title.copyWith(
+                      color: StylesConstant.accentColor,
+                      fontWeight: FontWeight.w600,
+                    ),
+                textScaleFactor: 1.1,
               ),
             ],
           ),

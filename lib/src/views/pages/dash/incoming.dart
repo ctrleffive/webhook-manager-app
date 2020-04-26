@@ -6,7 +6,6 @@ class IncomingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PageWrap(
-      isCentered: false,
       icon: Icons.cloud_download,
       title: 'Incoming',
       noLoader: true,

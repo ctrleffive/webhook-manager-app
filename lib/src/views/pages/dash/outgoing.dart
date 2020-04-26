@@ -67,7 +67,6 @@ class OutgoingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PageWrap(
-      isCentered: false,
       icon: Icons.cloud_upload,
       title: 'Outgoing',
       noLoader: true,

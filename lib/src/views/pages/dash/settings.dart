@@ -23,7 +23,6 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PageWrap(
-      isCentered: false,
       icon: Icons.settings,
       title: 'Settings',
       noLoader: true,
