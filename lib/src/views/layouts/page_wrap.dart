@@ -12,6 +12,7 @@ class PageWrap extends StatelessWidget {
   final String title;
   final IconData icon;
   final bool isCentered;
+  final bool noLoader;
   final PageView pageView;
   final Widget bottomNav;
 
@@ -22,16 +23,17 @@ class PageWrap extends StatelessWidget {
     this.child,
     this.children,
     this.pageView,
+    this.noLoader = false,
     this.bottomNav,
     this.isCentered = true,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: <Widget>[
-          SafeArea(
+    return Stack(
+      children: <Widget>[
+        Scaffold(
+          body: SafeArea(
             child: LayoutBuilder(
               builder: (BuildContext context, BoxConstraints constraints) {
                 if (this.pageView != null) return this.pageView;
@@ -77,6 +79,9 @@ class PageWrap extends StatelessWidget {
               },
             ),
           ),
+          bottomNavigationBar: this.bottomNav,
+        ),
+        if (!this.noLoader)
           StreamBuilder<bool>(
             stream: StreamsService.loaderState,
             initialData: StreamsService.loaderState.value,
@@ -87,27 +92,17 @@ class PageWrap extends StatelessWidget {
                   opacity: snapshot.data ? 1 : 0,
                   duration: Duration(milliseconds: 200),
                   curve: Curves.easeInOut,
-                  child: ClipRect(
-                    child: BackdropFilter(
-                      filter: ImageFilter.blur(
-                        sigmaX: 5,
-                        sigmaY: 5,
-                      ),
-                      child: Container(
-                        color: Colors.white10,
-                        child: Center(
-                          child: CircularProgressIndicator(),
-                        ),
-                      ),
+                  child: Container(
+                    color: Colors.white.withOpacity(0.95),
+                    child: Center(
+                      child: CircularProgressIndicator(),
                     ),
                   ),
                 ),
               );
             },
           ),
-        ],
-      ),
-      bottomNavigationBar: this.bottomNav,
+      ],
     );
   }
 }
