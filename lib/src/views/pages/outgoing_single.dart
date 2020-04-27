@@ -37,6 +37,20 @@ class OutgoingSingle extends StatelessWidget {
     }
   }
 
+  Future<void> _deleteItem(BuildContext context) async {
+    try {
+      await this._service.deleteItem(this.data.id);
+      Navigator.of(context).pop();
+    } catch (e) {
+      Scaffold.of(context).showSnackBar(
+        SnackBar(
+          backgroundColor: Colors.redAccent,
+          content: Text('Error deleting!'),
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return PageWrap(
@@ -99,6 +113,7 @@ class OutgoingSingle extends StatelessWidget {
               isBlock: true,
               isFlat: true,
               color: Colors.redAccent,
+              onTap: () => this._deleteItem(context),
             ),
           ],
         ),

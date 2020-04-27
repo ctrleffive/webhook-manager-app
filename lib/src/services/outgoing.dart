@@ -49,4 +49,18 @@ class OutgoingService {
       rethrow;
     }
   }
+
+  Future<void> deleteItem(int id) async {
+    try {
+      final Database dbClient = await this._dbService.db;
+      await dbClient.delete(
+        OutgoingData.tableName,
+        where: 'id = ?',
+        whereArgs: [id],
+      );
+      StreamsService.outgoings.sink.add(await this.all);
+    } catch (e) {
+      rethrow;
+    }
+  }
 }
