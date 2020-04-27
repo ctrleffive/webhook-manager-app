@@ -27,7 +27,7 @@ class IncomingData {
     if (map == null) return null;
   
     return IncomingData(
-      id: map['id'],
+      id: int.parse('${map['id']}'),
       eventName: map['eventName'],
     );
   }

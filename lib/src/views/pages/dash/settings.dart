@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:webhook_manager/src/services/auth.dart';
+import 'package:webhook_manager/src/services/settings.dart';
 import 'package:webhook_manager/src/views/components/button.dart';
 
 import 'package:webhook_manager/src/views/layouts/page_wrap.dart';
@@ -9,6 +10,7 @@ import 'package:webhook_manager/src/views/pages/welcome.dart';
 
 class SettingsPage extends StatelessWidget {
   final AuthService _authService = AuthService();
+  final SettingsService _service = SettingsService();
 
   Future<void> _signOut(BuildContext context) async {
     await this._authService.signOut();
@@ -31,6 +33,13 @@ class SettingsPage extends StatelessWidget {
           isBlock: true,
           label: 'Logout',
           onTap: () => this._signOut(context),
+        ),
+        Button(
+          isBlock: true,
+          isFlat: true,
+          color: Colors.redAccent,
+          label: 'Clear DB',
+          onTap: this._service.clearDb,
         ),
       ],
     );

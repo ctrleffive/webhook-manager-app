@@ -5,6 +5,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:webhook_manager/src/models/outgoing.dart';
 
 import 'package:webhook_manager/src/services/database.dart';
+import 'package:webhook_manager/src/services/streams.dart';
 
 class OutgoingService {
   final DBService _dbService = DBService();
@@ -20,8 +21,32 @@ class OutgoingService {
       }).toList();
       return listData;
     } catch (e) {
-      debugPrint(e);
       return [];
+    }
+  }
+
+  Future<void> addNew(OutgoingData data) async {
+    try {
+      final Database dbClient = await this._dbService.db;
+      await dbClient.insert(OutgoingData.tableName, data.toMap());
+      StreamsService.outgoings.sink.add(await this.all);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> updateExisting(OutgoingData data) async {
+    try {
+      final Database dbClient = await this._dbService.db;
+      await dbClient.update(
+        OutgoingData.tableName,
+        data.toMap(),
+        where: 'id = ?',
+        whereArgs: [data.id],
+      );
+      StreamsService.outgoings.sink.add(await this.all);
+    } catch (e) {
+      rethrow;
     }
   }
 }

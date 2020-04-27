@@ -46,12 +46,12 @@ class NotificationData {
     if (map == null) return null;
   
     return NotificationData(
-      id: map['id'],
+      id: int.parse('${map['id']}'),
       eventName: map['eventName'],
       headers: map['headers'],
       payload: map['payload'],
       receivedTime: DateTime.fromMillisecondsSinceEpoch(map['receivedTime']),
-      method: RequestMethod.values[map['method']],
+      method: RequestMethod.values[int.parse('${map['method']}')],
     );
   }
 

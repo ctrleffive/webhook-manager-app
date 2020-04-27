@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:webhook_manager/src/constants/enums.dart';
 import 'package:webhook_manager/src/constants/styles.dart';
+import 'package:webhook_manager/src/services/helpers.dart';
 
 class MethodLabel extends StatelessWidget {
   final RequestMethod method;
@@ -17,7 +18,7 @@ class MethodLabel extends StatelessWidget {
         borderRadius: BorderRadius.circular(5),
       ),
       child: Text(
-        this.method.toString().replaceAll('RequestMethod.', '').toUpperCase(),
+        Helpers.methodFormaterReverse(this.method),
         style: TextStyle(
           fontWeight: FontWeight.bold,
           letterSpacing: 2,

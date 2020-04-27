@@ -33,7 +33,7 @@ class OutgoingData {
       'id': id,
       'eventName': eventName,
       'payload': payload,
-      'payload': url,
+      'url': url,
       'method': method.index,
     };
   }
@@ -42,11 +42,11 @@ class OutgoingData {
     if (map == null) return null;
   
     return OutgoingData(
-      id: map['id'],
+      id: int.parse('${map['id']}'),
       eventName: map['eventName'],
       payload: map['payload'],
       url: map['url'],
-      method: RequestMethod.values[map['method']],
+      method: RequestMethod.values[int.parse('${map['method']}')],
     );
   }
 

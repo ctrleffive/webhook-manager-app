@@ -1,7 +1,5 @@
-import 'package:content_placeholder/content_placeholder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:webhook_manager/src/constants/enums.dart';
 
 import 'package:webhook_manager/src/constants/styles.dart';
 
