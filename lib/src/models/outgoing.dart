@@ -6,13 +6,17 @@ class OutgoingData {
   int id;
   String eventName;
   String payload;
+  String headers;
   String url;
+  bool deleted;
   RequestMethod method;
   
   OutgoingData({
     this.id,
     this.eventName,
     this.payload,
+    this.deleted,
+    this.headers,
     this.url,
     this.method,
   });
@@ -22,8 +26,10 @@ class OutgoingData {
     CREATE TABLE $tableName (
       id            INTEGER PRIMARY KEY,
       url           TEXT,
+      deleted       INTEGER,
       method        TEXT,
       payload       TEXT,
+      headers       TEXT,
       eventName     TEXT
     )
   ''';
@@ -33,6 +39,8 @@ class OutgoingData {
       'id': id,
       'eventName': eventName,
       'payload': payload,
+      'headers': headers,
+      'deleted': deleted ? 1 : 0,
       'url': url,
       'method': method.index,
     };
@@ -45,6 +53,8 @@ class OutgoingData {
       id: int.parse('${map['id']}'),
       eventName: map['eventName'],
       payload: map['payload'],
+      headers: map['headers'],
+      deleted: map['deleted'] == 1,
       url: map['url'],
       method: RequestMethod.values[int.parse('${map['method']}')],
     );

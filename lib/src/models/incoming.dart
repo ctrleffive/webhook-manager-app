@@ -2,9 +2,11 @@ import 'dart:convert';
 
 class IncomingData {
   int id;
+  bool deleted;
   String eventName;
   IncomingData({
     this.id,
+    this.deleted,
     this.eventName,
   });
 
@@ -12,6 +14,7 @@ class IncomingData {
   static const String tableSchema = '''
     CREATE TABLE $tableName (
       id            INTEGER PRIMARY KEY,
+      deleted       INTEGER,
       eventName     TEXT
     )
   ''';
@@ -19,6 +22,7 @@ class IncomingData {
   Map<String, dynamic> toMap() {
     return {
       'id': id,
+      'deleted': deleted ? 1 : 0,
       'eventName': eventName,
     };
   }
@@ -28,6 +32,7 @@ class IncomingData {
   
     return IncomingData(
       id: int.parse('${map['id']}'),
+      deleted: map['deleted'] == 1,
       eventName: map['eventName'],
     );
   }

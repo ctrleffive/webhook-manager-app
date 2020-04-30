@@ -6,28 +6,31 @@ class NotificationData {
   int id;
   String eventName;
   String payload;
+  bool deleted;
   String headers;
-  DateTime receivedTime;
+  DateTime createdAt;
   RequestMethod method;
 
   NotificationData({
     this.id,
+    this.deleted,
     this.eventName,
     this.headers,
     this.payload,
-    this.receivedTime,
+    this.createdAt,
     this.method,
   });
 
   static const String tableName = 'notification';
   static const String tableSchema = '''
     CREATE TABLE $tableName (
-      id            INTEGER PRIMARY KEY,
-      method        TEXT,
-      headers       TEXT,
-      payload       TEXT,
-      eventName     TEXT,
-      receivedTime  TEXT
+      id          INTEGER PRIMARY KEY,
+      method      TEXT,
+      headers     TEXT,
+      deleted     INTEGER,
+      payload     TEXT,
+      eventName   TEXT,
+      createdAt   TEXT
     )
   ''';
 
@@ -37,7 +40,8 @@ class NotificationData {
       'eventName': eventName,
       'headers': headers,
       'payload': payload,
-      'receivedTime': receivedTime?.millisecondsSinceEpoch,
+      'deleted': deleted ? 1 : 0,
+      'createdAt': createdAt?.millisecondsSinceEpoch,
       'method': method.index,
     };
   }
@@ -50,7 +54,8 @@ class NotificationData {
       eventName: map['eventName'],
       headers: map['headers'],
       payload: map['payload'],
-      receivedTime: DateTime.fromMillisecondsSinceEpoch(map['receivedTime']),
+      deleted: map['deleted'] == 1,
+      createdAt: DateTime.fromMillisecondsSinceEpoch(map['createdAt']),
       method: RequestMethod.values[int.parse('${map['method']}')],
     );
   }
