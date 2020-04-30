@@ -29,41 +29,10 @@ class OutgoingService {
     }
   }
 
-  Future<void> addNew(OutgoingData data) async {
+  Future<void> deleteItem(OutgoingData data) async {
     try {
-      final Database dbClient = await this._dbService.db;
-      data.updatedAt = DateTime.now();
-      await dbClient.insert(OutgoingData.tableName, data.toMap());
-      StreamsService.outgoings.sink.add(await this.all);
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  Future<void> updateExisting(OutgoingData data) async {
-    try {
-      final Database dbClient = await this._dbService.db;
-      data.updatedAt = DateTime.now();
-      await dbClient.update(
-        OutgoingData.tableName,
-        data.toMap(),
-        where: 'id = ?',
-        whereArgs: [data.id],
-      );
-      StreamsService.outgoings.sink.add(await this.all);
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  Future<void> deleteItem(String id) async {
-    try {
-      final Database dbClient = await this._dbService.db;
-      await dbClient.delete(
-        OutgoingData.tableName,
-        where: 'id = ?',
-        whereArgs: [id],
-      );
+      data.deleted = true;
+      await this.updateMany([data]);
       StreamsService.outgoings.sink.add(await this.all);
     } catch (e) {
       rethrow;

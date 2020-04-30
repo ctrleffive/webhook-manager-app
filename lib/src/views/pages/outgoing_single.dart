@@ -24,7 +24,7 @@ class OutgoingSingle extends StatelessWidget {
       this._formKey.currentState.save();
       final bool _isValidated = this._formKey.currentState.validate();
       if (_isValidated) {
-        await this._service.updateExisting(this.data);
+        await this._service.updateMany([this.data]);
       }
       Navigator.of(context).pop();
     } catch (e) {
@@ -39,7 +39,7 @@ class OutgoingSingle extends StatelessWidget {
 
   Future<void> _deleteItem(BuildContext context) async {
     try {
-      await this._service.deleteItem(this.data.id);
+      await this._service.deleteItem(this.data);
       Navigator.of(context).pop();
     } catch (e) {
       Scaffold.of(context).showSnackBar(
