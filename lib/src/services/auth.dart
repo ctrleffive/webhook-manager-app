@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:webhook_manager/src/models/user.dart';
@@ -9,6 +11,7 @@ class AuthService {
 
   Future<bool> get session async {
     final FirebaseUser user = await this._firebaseAuth.currentUser();
+    debugPrint('Token: ${(await user.getIdToken()).token}');
     StreamsService.sessionUser.sink.add(user);
     return user != null;
   }

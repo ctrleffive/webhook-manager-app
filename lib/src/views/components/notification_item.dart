@@ -43,7 +43,7 @@ class NotificationItem extends StatelessWidget {
                     MethodLabel(this.data.method),
                     Text(
                       DateFormat('MMM d y - h:mm a')
-                          .format(this.data.receivedTime),
+                          .format(this.data.createdAt),
                       style: TextStyle(
                         color: StylesConstant.accentColor.withOpacity(0.6),
                       ),

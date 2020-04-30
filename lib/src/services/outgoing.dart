@@ -1,6 +1,8 @@
-import 'package:flutter/foundation.dart';
+import 'dart:convert';
 
+import 'package:http/http.dart' as http;
 import 'package:sqflite/sqflite.dart';
+import 'package:webhook_manager/src/constants/enums.dart';
 
 import 'package:webhook_manager/src/models/outgoing.dart';
 
@@ -59,6 +61,20 @@ class OutgoingService {
         whereArgs: [id],
       );
       StreamsService.outgoings.sink.add(await this.all);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> excecute(OutgoingData data) async {
+    try {
+      switch (data.method) {
+        case RequestMethod.get:
+          await http.get(data.url, headers: json.decode(data.headers));
+          break;
+        default:
+          throw Exception('Invalid method!');
+      }
     } catch (e) {
       rethrow;
     }
