@@ -16,6 +16,12 @@ class AuthService {
     return user != null;
   }
 
+  Future<String> get token async {
+    final FirebaseUser user = await this._firebaseAuth.currentUser();
+    final IdTokenResult idTokenResult = await user.getIdToken();
+    return idTokenResult.token;
+  }
+
   Future<void> signOut() async {
     try {
       await this._firebaseAuth.signOut();
