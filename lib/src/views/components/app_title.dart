@@ -46,12 +46,25 @@ class AppTitle extends StatelessWidget {
                     initialData: StreamsService.syncState.value,
                     builder: (_, AsyncSnapshot<bool> snapshot) {
                       if (snapshot.data) {
-                        return SizedBox(
-                          width: 30,
-                          height: 30,
-                          child: CircularProgressIndicator(
-                            strokeWidth: 2,
-                          ),
+                        return Stack(
+                          alignment: Alignment.center,
+                          children: <Widget>[
+                            Icon(
+                              Icons.radio_button_unchecked,
+                              size: 30,
+                              color: StylesConstant.primaryColor,
+                            ),
+                            Opacity(
+                              opacity: 0.4,
+                              child: SizedBox(
+                                width: 10,
+                                height: 10,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 3,
+                                ),
+                              ),
+                            ),
+                          ],
                         );
                       }
                       return Icon(
