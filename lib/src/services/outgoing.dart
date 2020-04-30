@@ -19,6 +19,8 @@ class OutgoingService {
       final Database dbClient = await this._dbService.db;
       final List<Map> queryData = await dbClient.query(
         OutgoingData.tableName,
+        where: 'deleted = ?',
+        whereArgs: [0],
       );
       final List<OutgoingData> listData = queryData.map((Map item) {
         return OutgoingData.fromMap(item);
@@ -34,6 +36,19 @@ class OutgoingService {
       data.deleted = true;
       await this.updateMany([data]);
       StreamsService.outgoings.sink.add(await this.all);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> clearDeleted() async {
+    try {
+      final Database dbClient = await this._dbService.db;
+      await dbClient.delete(
+        OutgoingData.tableName,
+        where: 'deleted = ?',
+        whereArgs: [1],
+      );
     } catch (e) {
       rethrow;
     }

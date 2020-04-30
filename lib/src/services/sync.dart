@@ -42,14 +42,32 @@ class SyncService {
   }
 
   Future<DateTime> get lastSync async {
-    final SharedPreferences preferences = await SharedPreferences.getInstance();
-    final int lastSync = preferences.getInt('lastSync');
-    return DateTime.fromMillisecondsSinceEpoch(lastSync ?? 0);
+    try {
+      final SharedPreferences preferences = await SharedPreferences.getInstance();
+      final int lastSync = preferences.getInt('lastSync');
+      return DateTime.fromMillisecondsSinceEpoch(lastSync ?? 0);
+    } catch (e) {
+      rethrow;
+    }
   }
 
   Future<void> setLastSync(DateTime lastSync) async {
-    final SharedPreferences preferences = await SharedPreferences.getInstance();
-    preferences.setInt('lastSync', lastSync.millisecondsSinceEpoch);
+    try {
+      final SharedPreferences preferences = await SharedPreferences.getInstance();
+      preferences.setInt('lastSync', lastSync.millisecondsSinceEpoch);
+    } catch (e) {
+      rethrow;
+    }
+  }
+  
+  Future<void> clearDeleted() async {
+    try {
+      await this._notificationService.clearDeleted();
+      await this._outgoingService.clearDeleted();
+      await this._incomingService.clearDeleted();
+    } catch (e) {
+      rethrow;
+    }
   }
 
   Future<void> _serverSync() async {
@@ -67,10 +85,11 @@ class SyncService {
         body: data.toJson(),
       );
       final SyncReceivedData responseData = SyncReceivedData.fromJson(apiResponse.body);
-      await this.setLastSync(responseData.syncTime);
       await this._notificationService.addMany(responseData.notifications);
       await this._outgoingService.updateMany(responseData.outgoings);
       await this._incomingService.updateMany(responseData.incomings);
+      await this.setLastSync(responseData.syncTime);
+      await this.clearDeleted();
       return;
     } catch (e) {
       rethrow;
