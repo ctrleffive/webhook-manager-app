@@ -46,8 +46,9 @@ class NotificationService {
     try {
       data.deleted = true;
       final Database dbClient = await this._dbService.db;
-      await dbClient.delete(
+      await dbClient.update(
         NotificationData.tableName,
+        data.toMap(),
         where: 'id = ?',
         whereArgs: [data.id],
       );
