@@ -1,19 +1,23 @@
 import 'dart:convert';
 
 class IncomingData {
-  int id;
+  String id;
   bool deleted;
   String eventName;
+  DateTime updatedAt;
   IncomingData({
     this.id,
     this.deleted = false,
     this.eventName,
+    this.updatedAt,
   });
 
   static const String tableName = 'incoming';
   static const String tableSchema = '''
     CREATE TABLE $tableName (
-      id            INTEGER PRIMARY KEY,
+      _id           INTEGER PRIMARY KEY,
+      id            TEXT,
+      updatedAt     TEXT,
       deleted       INTEGER,
       eventName     TEXT
     )
@@ -24,6 +28,7 @@ class IncomingData {
       'id': id,
       'deleted': deleted ? 1 : 0,
       'eventName': eventName,
+      'updatedAt': updatedAt?.millisecondsSinceEpoch,
     };
   }
 
@@ -31,9 +36,10 @@ class IncomingData {
     if (map == null) return null;
   
     return IncomingData(
-      id: int.parse('${map['id']}'),
+      id: map['id'],
       deleted: map['deleted'] == 1,
       eventName: map['eventName'],
+      updatedAt: DateTime.fromMillisecondsSinceEpoch(int.parse('${map['updatedAt']}')),
     );
   }
 

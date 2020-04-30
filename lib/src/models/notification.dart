@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:webhook_manager/src/constants/enums.dart';
 
 class NotificationData {
-  int id;
+  String id;
   String eventName;
   String payload;
   bool deleted;
@@ -24,7 +24,8 @@ class NotificationData {
   static const String tableName = 'notification';
   static const String tableSchema = '''
     CREATE TABLE $tableName (
-      id          INTEGER PRIMARY KEY,
+      _id         INTEGER PRIMARY KEY,
+      id          TEXT,
       method      TEXT,
       headers     TEXT,
       deleted     INTEGER,
@@ -50,12 +51,12 @@ class NotificationData {
     if (map == null) return null;
   
     return NotificationData(
-      id: int.parse('${map['id']}'),
+      id: map['id'],
       eventName: map['eventName'],
       headers: map['headers'],
       payload: map['payload'],
       deleted: map['deleted'] == 1,
-      createdAt: DateTime.fromMillisecondsSinceEpoch(map['createdAt']),
+      createdAt: DateTime.fromMillisecondsSinceEpoch(int.parse('${map['createdAt']}')),
       method: RequestMethod.values[int.parse('${map['method']}')],
     );
   }

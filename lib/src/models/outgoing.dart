@@ -3,18 +3,20 @@ import 'dart:convert';
 import 'package:webhook_manager/src/constants/enums.dart';
 
 class OutgoingData {
-  int id;
+  String id;
   String eventName;
   String payload;
   String headers;
   String url;
   bool deleted;
+  DateTime updatedAt;
   RequestMethod method;
   
   OutgoingData({
     this.id,
     this.eventName,
     this.payload,
+    this.updatedAt,
     this.deleted = false,
     this.headers,
     this.url,
@@ -24,9 +26,11 @@ class OutgoingData {
   static const String tableName = 'outgoing';
   static const String tableSchema = '''
     CREATE TABLE $tableName (
-      id            INTEGER PRIMARY KEY,
+      _id           INTEGER PRIMARY KEY,
+      id            TEXT,
       url           TEXT,
       deleted       INTEGER,
+      updatedAt     TEXT,
       method        TEXT,
       payload       TEXT,
       headers       TEXT,
@@ -40,6 +44,7 @@ class OutgoingData {
       'eventName': eventName,
       'payload': payload,
       'headers': headers,
+      'updatedAt': updatedAt?.millisecondsSinceEpoch,
       'deleted': deleted ? 1 : 0,
       'url': url,
       'method': method.index,
@@ -50,12 +55,13 @@ class OutgoingData {
     if (map == null) return null;
   
     return OutgoingData(
-      id: int.parse('${map['id']}'),
+      id: map['id'],
       eventName: map['eventName'],
       payload: map['payload'],
       headers: map['headers'],
       deleted: map['deleted'] == 1,
       url: map['url'],
+      updatedAt: DateTime.fromMillisecondsSinceEpoch(int.parse('${map['updatedAt']}')),
       method: RequestMethod.values[int.parse('${map['method']}')],
     );
   }
