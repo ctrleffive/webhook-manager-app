@@ -93,6 +93,13 @@ class OutgoingSingle extends StatelessWidget {
             ),
             TextInput(
               lines: 4,
+              label: 'Headers',
+              initialValue: this.data.headers,
+              placeholder: 'eg. {}',
+              onSave: (value) => this.data.headers = value,
+            ),
+            TextInput(
+              lines: 4,
               label: 'Payload',
               initialValue: this.data.payload,
               placeholder: 'eg. {\n\t"build":true\n}',

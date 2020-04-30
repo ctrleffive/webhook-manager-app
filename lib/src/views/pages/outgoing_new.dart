@@ -74,6 +74,12 @@ class OutgoingNew extends StatelessWidget {
             ),
             TextInput(
               lines: 4,
+              label: 'Heders',
+              placeholder: 'eg. {}',
+              onSave: (value) => this._data.headers = value,
+            ),
+            TextInput(
+              lines: 4,
               label: 'Payload',
               placeholder: 'eg. {\n\t"build":true\n}',
               onSave: (value) => this._data.payload = value,
