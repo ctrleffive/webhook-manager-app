@@ -66,8 +66,11 @@ class SyncService {
         '${KeysConstant.api}/sync',
         body: data.toJson(),
       );
-      final SyncReceivedData responseData =
-          SyncReceivedData.fromJson(apiResponse.body);
+      final SyncReceivedData responseData = SyncReceivedData.fromJson(apiResponse.body);
+      await this.setLastSync(responseData.syncTime);
+      await this._notificationService.addMany(responseData.notifications);
+      await this._outgoingService.updateMany(responseData.outgoings);
+      await this._incomingService.updateMany(responseData.incomings);
       return;
     } catch (e) {
       rethrow;

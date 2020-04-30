@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:sqflite/sqflite.dart';
+
 import 'package:webhook_manager/src/constants/enums.dart';
 
 import 'package:webhook_manager/src/models/outgoing.dart';
@@ -24,7 +25,7 @@ class OutgoingService {
       }).toList();
       return listData;
     } catch (e) {
-      return [];
+      rethrow;
     }
   }
 
@@ -76,7 +77,38 @@ class OutgoingService {
       }).toList();
       return listData;
     } catch (e) {
-      return [];
+      rethrow;
+    }
+  }
+
+  Future<void> updateMany(List<OutgoingData> data) async {
+    try {
+      final List<OutgoingData> allData = await this.all;
+
+      final Database dbClient = await this._dbService.db;
+      final Batch batch = dbClient.batch();
+
+      for (final OutgoingData item in data) {
+        final OutgoingData existingItem = allData.firstWhere(
+          (toCheck) => item.id == toCheck.id,
+          orElse: () => null,
+        );
+
+        if (existingItem != null) {
+          batch.update(
+            OutgoingData.tableName,
+            item.toMap(),
+            where: 'id = ?',
+            whereArgs: [item.id],
+          );
+        } else {
+          batch.insert(OutgoingData.tableName, item.toMap());
+        }
+      }
+
+      await batch.commit();
+    } catch (e) {
+      rethrow;
     }
   }
 

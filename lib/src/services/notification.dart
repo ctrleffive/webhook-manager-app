@@ -1,5 +1,3 @@
-import 'package:flutter/foundation.dart';
-
 import 'package:sqflite/sqflite.dart';
 
 import 'package:webhook_manager/src/models/notification.dart';
@@ -20,8 +18,7 @@ class NotificationService {
       }).toList();
       return listData;
     } catch (e) {
-      debugPrint(e);
-      return [];
+      rethrow;
     }
   }
 
@@ -38,8 +35,22 @@ class NotificationService {
       }).toList();
       return listData;
     } catch (e) {
-      debugPrint(e);
-      return [];
+      rethrow;
+    }
+  }
+
+  Future<void> addMany(List<NotificationData> data) async {
+    try {
+      final Database dbClient = await this._dbService.db;
+      final Batch batch = dbClient.batch();
+
+      for (final NotificationData item in data) {
+        batch.insert(NotificationData.tableName, item.toMap());
+      }
+
+      await batch.commit();
+    } catch (e) {
+      rethrow;
     }
   }
 }
