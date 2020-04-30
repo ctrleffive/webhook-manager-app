@@ -13,7 +13,7 @@ class NotificationData {
 
   NotificationData({
     this.id,
-    this.deleted,
+    this.deleted = false,
     this.eventName,
     this.headers,
     this.payload,

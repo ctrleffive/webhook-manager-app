@@ -6,7 +6,7 @@ class IncomingData {
   String eventName;
   IncomingData({
     this.id,
-    this.deleted,
+    this.deleted = false,
     this.eventName,
   });
 

@@ -15,7 +15,7 @@ class OutgoingData {
     this.id,
     this.eventName,
     this.payload,
-    this.deleted,
+    this.deleted = false,
     this.headers,
     this.url,
     this.method,
