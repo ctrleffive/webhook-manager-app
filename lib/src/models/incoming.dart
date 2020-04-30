@@ -4,10 +4,12 @@ class IncomingData {
   String id;
   bool deleted;
   String eventName;
+  String hookId;
   DateTime updatedAt;
   IncomingData({
     this.id,
     this.deleted = false,
+    this.hookId,
     this.eventName,
     this.updatedAt,
   });
@@ -17,6 +19,7 @@ class IncomingData {
     CREATE TABLE $tableName (
       _id           INTEGER PRIMARY KEY,
       id            TEXT,
+      hookId        TEXT,
       updatedAt     TEXT,
       deleted       INTEGER,
       eventName     TEXT
@@ -27,6 +30,7 @@ class IncomingData {
     return {
       'id': id,
       'deleted': deleted ? 1 : 0,
+      'hookId': hookId,
       'eventName': eventName,
       'updatedAt': updatedAt?.toUtc()?.toIso8601String(),
     };
@@ -38,6 +42,7 @@ class IncomingData {
     return IncomingData(
       id: map['id'],
       deleted: map['deleted'] == 1,
+      hookId: map['hookId'],
       eventName: map['eventName'],
       updatedAt: DateTime.parse(map['updatedAt']),
     );
