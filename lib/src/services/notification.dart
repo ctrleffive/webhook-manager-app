@@ -52,7 +52,7 @@ class NotificationService {
         where: 'id = ?',
         whereArgs: [data.id],
       );
-      StreamsService.notifications.sink.add(await this.all);
+      StreamsService.notfcatns.sink.add(await this.all);
     } catch (e) {
       rethrow;
     }

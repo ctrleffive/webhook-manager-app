@@ -18,8 +18,8 @@ class NotificationsPage extends StatelessWidget {
       title: 'Notifications',
       noLoader: true,
       child: StreamBuilder<List<NotificationData>>(
-        stream: StreamsService.notifications,
-        initialData: StreamsService.notifications.value,
+        stream: StreamsService.notfcatns,
+        initialData: StreamsService.notfcatns.value,
         builder: (_, AsyncSnapshot<List<NotificationData>> snapshot) {
           return ListView.builder(
             shrinkWrap: true,
