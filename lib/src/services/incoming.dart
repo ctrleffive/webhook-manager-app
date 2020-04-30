@@ -1,11 +1,10 @@
-import 'package:flutter/foundation.dart';
-
 import 'package:sqflite/sqflite.dart';
 
 import 'package:webhook_manager/src/models/incoming.dart';
+import 'package:webhook_manager/src/services/streams.dart';
 
-import 'package:webhook_manager/src/services/database.dart';
 import 'package:webhook_manager/src/services/sync.dart';
+import 'package:webhook_manager/src/services/database.dart';
 
 class IncomingService {
   final DBService _dbService = DBService();
@@ -20,6 +19,16 @@ class IncomingService {
         return IncomingData.fromMap(item);
       }).toList();
       return listData;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> deleteItem(IncomingData data) async {
+    try {
+      data.deleted = true;
+      await this.updateMany([data]);
+      StreamsService.incomings.sink.add(await this.all);
     } catch (e) {
       rethrow;
     }
