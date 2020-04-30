@@ -32,6 +32,7 @@ class OutgoingService {
   Future<void> addNew(OutgoingData data) async {
     try {
       final Database dbClient = await this._dbService.db;
+      data.updatedAt = DateTime.now();
       await dbClient.insert(OutgoingData.tableName, data.toMap());
       StreamsService.outgoings.sink.add(await this.all);
     } catch (e) {
@@ -42,6 +43,7 @@ class OutgoingService {
   Future<void> updateExisting(OutgoingData data) async {
     try {
       final Database dbClient = await this._dbService.db;
+      data.updatedAt = DateTime.now();
       await dbClient.update(
         OutgoingData.tableName,
         data.toMap(),
@@ -94,6 +96,7 @@ class OutgoingService {
           orElse: () => null,
         );
 
+        item.updatedAt = DateTime.now();
         if (existingItem != null) {
           batch.update(
             OutgoingData.tableName,

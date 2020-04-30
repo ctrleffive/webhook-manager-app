@@ -52,6 +52,7 @@ class IncomingService {
           orElse: () => null,
         );
 
+        item.updatedAt = DateTime.now();
         if (existingItem != null) {
           batch.update(
             IncomingData.tableName,
