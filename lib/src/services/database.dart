@@ -1,9 +1,10 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:synchronized/synchronized.dart';
+
 import 'package:webhook_manager/src/models/incoming.dart';
-import 'package:webhook_manager/src/models/notification.dart';
 import 'package:webhook_manager/src/models/outgoing.dart';
+import 'package:webhook_manager/src/models/notification.dart';
 
 class DBService {
   static const int version = 1;

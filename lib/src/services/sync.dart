@@ -3,10 +3,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:webhook_manager/src/constants/keys.dart';
 
+import 'package:webhook_manager/src/models/sync.dart';
 import 'package:webhook_manager/src/models/incoming.dart';
 import 'package:webhook_manager/src/models/outgoing.dart';
 import 'package:webhook_manager/src/models/notification.dart';
-import 'package:webhook_manager/src/models/sync.dart';
 
 import 'package:webhook_manager/src/services/auth.dart';
 import 'package:webhook_manager/src/services/streams.dart';

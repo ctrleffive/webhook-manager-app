@@ -4,8 +4,8 @@ import 'package:webhook_manager/src/models/incoming.dart';
 import 'package:webhook_manager/src/models/outgoing.dart';
 import 'package:webhook_manager/src/models/notification.dart';
 
-import 'package:webhook_manager/src/services/database.dart';
 import 'package:webhook_manager/src/services/sync.dart';
+import 'package:webhook_manager/src/services/database.dart';
 
 class SettingsService {
   final DBService _dbService = DBService();

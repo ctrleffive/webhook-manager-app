@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+
 import 'package:webhook_manager/src/constants/styles.dart';
 
-import 'package:webhook_manager/src/views/components/button.dart';
-
 import 'package:webhook_manager/src/views/layouts/page_wrap.dart';
+
+import 'package:webhook_manager/src/views/components/button.dart';
 
 class TermsPage extends StatelessWidget {
   @override

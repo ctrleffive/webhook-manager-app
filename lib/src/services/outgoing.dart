@@ -7,9 +7,9 @@ import 'package:webhook_manager/src/constants/enums.dart';
 
 import 'package:webhook_manager/src/models/outgoing.dart';
 
-import 'package:webhook_manager/src/services/database.dart';
-import 'package:webhook_manager/src/services/streams.dart';
 import 'package:webhook_manager/src/services/sync.dart';
+import 'package:webhook_manager/src/services/streams.dart';
+import 'package:webhook_manager/src/services/database.dart';
 
 class OutgoingService {
   final DBService _dbService = DBService();

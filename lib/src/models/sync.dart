@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:webhook_manager/src/models/incoming.dart';
-import 'package:webhook_manager/src/models/notification.dart';
 import 'package:webhook_manager/src/models/outgoing.dart';
+import 'package:webhook_manager/src/models/notification.dart';
 
 class SyncSendingData {
   String idToken;

@@ -11,7 +11,6 @@ class AuthService {
 
   Future<bool> get session async {
     final FirebaseUser user = await this._firebaseAuth.currentUser();
-    debugPrint('Token: ${(await user.getIdToken()).token}');
     StreamsService.sessionUser.sink.add(user);
     return user != null;
   }
@@ -19,7 +18,9 @@ class AuthService {
   Future<String> get token async {
     final FirebaseUser user = await this._firebaseAuth.currentUser();
     final IdTokenResult idTokenResult = await user.getIdToken();
-    return idTokenResult.token;
+    final String token = idTokenResult.token;
+    debugPrint('Token: $token');
+    return token;
   }
 
   Future<void> signOut() async {

@@ -1,9 +1,9 @@
 import 'package:sqflite/sqflite.dart';
 
 import 'package:webhook_manager/src/models/incoming.dart';
-import 'package:webhook_manager/src/services/streams.dart';
 
 import 'package:webhook_manager/src/services/sync.dart';
+import 'package:webhook_manager/src/services/streams.dart';
 import 'package:webhook_manager/src/services/database.dart';
 
 class IncomingService {

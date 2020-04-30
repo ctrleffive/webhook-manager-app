@@ -1,7 +1,7 @@
 import 'package:rxdart/subjects.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:webhook_manager/src/models/incoming.dart';
 
+import 'package:webhook_manager/src/models/incoming.dart';
 import 'package:webhook_manager/src/models/outgoing.dart';
 import 'package:webhook_manager/src/models/notification.dart';
 

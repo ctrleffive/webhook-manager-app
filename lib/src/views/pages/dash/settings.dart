@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 
 import 'package:webhook_manager/src/services/auth.dart';
 import 'package:webhook_manager/src/services/settings.dart';
-import 'package:webhook_manager/src/views/components/button.dart';
 
 import 'package:webhook_manager/src/views/layouts/page_wrap.dart';
 
 import 'package:webhook_manager/src/views/pages/welcome.dart';
+
+import 'package:webhook_manager/src/views/components/button.dart';
 
 class SettingsPage extends StatelessWidget {
   final AuthService _authService = AuthService();
