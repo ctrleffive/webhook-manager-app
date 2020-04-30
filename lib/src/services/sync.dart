@@ -27,9 +27,9 @@ class SyncService {
 
   Future<void> _fetchLocal() async {
     try {
-      StreamsService.notfcatns.sink.add(await this._notfictnSrv.all);
-      StreamsService.outgoings.sink.add(await this._outgoingSrv.all);
-      StreamsService.incomings.sink.add(await this._incomingSrv.all);
+      StreamsService.notfcatns.sink.add(await this._notfictnSrv.all());
+      StreamsService.outgoings.sink.add(await this._outgoingSrv.all());
+      StreamsService.incomings.sink.add(await this._incomingSrv.all());
     } catch (e) {
       rethrow;
     }
@@ -84,8 +84,14 @@ class SyncService {
       final SyncReceivedData responseData =
           SyncReceivedData.fromJson(apiResponse.body);
       await this._notfictnSrv.addMany(responseData.notifications);
-      await this._outgoingSrv.updateMany(responseData.outgoings);
-      await this._incomingSrv.updateMany(responseData.incomings);
+      await this._outgoingSrv.updateMany(
+            responseData.outgoings,
+            fromSync: true,
+          );
+      await this._incomingSrv.updateMany(
+            responseData.incomings,
+            fromSync: true,
+          );
       await this.setLastSync(responseData.syncTime);
       await this.clearDeleted();
       await this._fetchLocal();

@@ -8,12 +8,12 @@ import 'package:webhook_manager/src/services/streams.dart';
 class NotificationService {
   final DBService _dbService = DBService();
 
-  Future<List<NotificationData>> get all async {
+  Future<List<NotificationData>> all({bool all: false}) async {
     try {
       final Database dbClient = await this._dbService.db;
       final List<Map> queryData = await dbClient.query(
         NotificationData.tableName,
-        where: 'deleted = ?',
+        where: all ? null : 'deleted = ?',
         whereArgs: [0],
       );
       final List<NotificationData> listData = queryData.map((Map item) {
@@ -27,14 +27,9 @@ class NotificationService {
 
   Future<List<NotificationData>> get deleted async {
     try {
-      final Database dbClient = await this._dbService.db;
-      final List<Map> queryData = await dbClient.query(
-        NotificationData.tableName,
-        where: 'deleted = ?',
-        whereArgs: [1],
-      );
-      final List<NotificationData> listData = queryData.map((Map item) {
-        return NotificationData.fromMap(item);
+      final List<NotificationData> listData =
+          (await this.all(all: true)).where((NotificationData item) {
+        return item.deleted;
       }).toList();
       return listData;
     } catch (e) {
@@ -52,7 +47,7 @@ class NotificationService {
         where: 'id = ?',
         whereArgs: [data.id],
       );
-      StreamsService.notfcatns.sink.add(await this.all);
+      StreamsService.notfcatns.sink.add(await this.all(all: true));
     } catch (e) {
       rethrow;
     }

@@ -9,12 +9,12 @@ import 'package:webhook_manager/src/services/database.dart';
 class IncomingService {
   final DBService _dbService = DBService();
 
-  Future<List<IncomingData>> get all async {
+  Future<List<IncomingData>> all({bool all: false}) async {
     try {
       final Database dbClient = await this._dbService.db;
       final List<Map> queryData = await dbClient.query(
         IncomingData.tableName,
-        where: 'deleted = ?',
+        where: all ? null : 'deleted = ?',
         whereArgs: [0],
       );
       final List<IncomingData> listData = queryData.map((Map item) {
@@ -30,7 +30,7 @@ class IncomingService {
     try {
       data.deleted = true;
       await this.updateMany([data]);
-      StreamsService.incomings.sink.add(await this.all);
+      StreamsService.incomings.sink.add(await this.all(all: true));
     } catch (e) {
       rethrow;
     }
@@ -54,7 +54,7 @@ class IncomingService {
       final SyncService _syncService = SyncService();
       final DateTime lastSync = await _syncService.lastSync;
       final List<IncomingData> listData =
-          (await this.all).where((IncomingData item) {
+          (await this.all(all: true)).where((IncomingData item) {
         return item.updatedAt.isAfter(lastSync);
       }).toList();
       return listData;
@@ -66,15 +66,19 @@ class IncomingService {
   Future<void> update(IncomingData data) async {
     try {
       await this.updateMany([data]);
-      StreamsService.incomings.sink.add(await this.all);
+      final SyncService _syncService = SyncService();
+      _syncService.init();
     } catch (e) {
       rethrow;
     }
   }
 
-  Future<void> updateMany(List<IncomingData> data) async {
+  Future<void> updateMany(
+    List<IncomingData> data, {
+    bool fromSync = false,
+  }) async {
     try {
-      final List<IncomingData> allData = await this.all;
+      final List<IncomingData> allData = await this.all(all: true);
 
       final Database dbClient = await this._dbService.db;
       final Batch batch = dbClient.batch();
@@ -85,7 +89,7 @@ class IncomingService {
           orElse: () => null,
         );
 
-        item.updatedAt = DateTime.now();
+        if (!fromSync) item.updatedAt = DateTime.now();
         if (existingItem != null) {
           batch.update(
             IncomingData.tableName,
