@@ -24,9 +24,9 @@ class OutgoingSingle extends StatelessWidget {
       this._formKey.currentState.save();
       final bool _isValidated = this._formKey.currentState.validate();
       if (_isValidated) {
-        await this._service.updateMany([this.data]);
+        await this._service.update(this.data);
+        Navigator.of(context).pop();
       }
-      Navigator.of(context).pop();
     } catch (e) {
       Scaffold.of(context).showSnackBar(
         SnackBar(
@@ -77,7 +77,8 @@ class OutgoingSingle extends StatelessWidget {
                     label: 'Method',
                     validator: Validators.required,
                     placeholder: 'eg. post',
-                    initialValue: Helpers.methodFormaterReverse(this.data.method),
+                    initialValue:
+                        Helpers.methodFormaterReverse(this.data.method),
                     onSave: (value) =>
                         this.data.method = Helpers.methodFormater(value),
                   ),

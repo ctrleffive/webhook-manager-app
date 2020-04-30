@@ -21,9 +21,9 @@ class OutgoingNew extends StatelessWidget {
       this._formKey.currentState.save();
       final bool _isValidated = this._formKey.currentState.validate();
       if (_isValidated) {
-        await this._service.updateMany([this._data]);
+        await this._service.update(this._data);
+        Navigator.of(context).pop();
       }
-      Navigator.of(context).pop();
     } catch (e) {
       Scaffold.of(context).showSnackBar(
         SnackBar(

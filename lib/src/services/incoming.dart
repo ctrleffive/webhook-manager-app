@@ -63,6 +63,15 @@ class IncomingService {
     }
   }
 
+  Future<void> update(IncomingData data) async {
+    try {
+      await this.updateMany([data]);
+      StreamsService.incomings.sink.add(await this.all);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   Future<void> updateMany(List<IncomingData> data) async {
     try {
       final List<IncomingData> allData = await this.all;
