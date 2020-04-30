@@ -44,7 +44,7 @@ class OutgoingData {
       'eventName': eventName,
       'payload': payload,
       'headers': headers,
-      'updatedAt': updatedAt?.millisecondsSinceEpoch,
+      'updatedAt': updatedAt?.toUtc()?.toIso8601String(),
       'deleted': deleted ? 1 : 0,
       'url': url,
       'method': method.index,
@@ -61,7 +61,7 @@ class OutgoingData {
       headers: map['headers'],
       deleted: map['deleted'] == 1,
       url: map['url'],
-      updatedAt: DateTime.fromMillisecondsSinceEpoch(int.parse('${map['updatedAt']}')),
+      updatedAt: DateTime.parse(map['updatedAt']),
       method: RequestMethod.values[int.parse('${map['method']}')],
     );
   }

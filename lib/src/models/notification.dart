@@ -42,7 +42,7 @@ class NotificationData {
       'headers': headers,
       'payload': payload,
       'deleted': deleted ? 1 : 0,
-      'createdAt': createdAt?.millisecondsSinceEpoch,
+      'createdAt': createdAt?.toUtc()?.toIso8601String(),
       'method': method.index,
     };
   }
@@ -56,7 +56,7 @@ class NotificationData {
       headers: map['headers'],
       payload: map['payload'],
       deleted: map['deleted'] == 1,
-      createdAt: DateTime.fromMillisecondsSinceEpoch(int.parse('${map['createdAt']}')),
+      createdAt: DateTime.parse(map['createdAt']),
       method: RequestMethod.values[int.parse('${map['method']}')],
     );
   }

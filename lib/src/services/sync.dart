@@ -44,8 +44,8 @@ class SyncService {
   Future<DateTime> get lastSync async {
     try {
       final SharedPreferences preferences = await SharedPreferences.getInstance();
-      final int lastSync = preferences.getInt('lastSync');
-      return DateTime.fromMillisecondsSinceEpoch(lastSync ?? 0);
+      final String lastSync = preferences.getString('lastSync');
+      return DateTime.parse(lastSync ?? "1996-00-00");
     } catch (e) {
       rethrow;
     }
@@ -54,7 +54,7 @@ class SyncService {
   Future<void> setLastSync(DateTime lastSync) async {
     try {
       final SharedPreferences preferences = await SharedPreferences.getInstance();
-      preferences.setInt('lastSync', lastSync.millisecondsSinceEpoch);
+      preferences.setString('lastSync', lastSync.toUtc()?.toIso8601String());
     } catch (e) {
       rethrow;
     }

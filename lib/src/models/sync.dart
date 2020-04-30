@@ -21,7 +21,7 @@ class SyncSendingData {
   Map<String, dynamic> toMap() {
     return {
       'idToken': idToken,
-      'lastSync': lastSync?.millisecondsSinceEpoch,
+      'lastSync': lastSync?.toUtc()?.toIso8601String(),
       'outgoings': outgoings?.map((x) => x?.toMap())?.toList(),
       'incomings': incomings?.map((x) => x?.toMap())?.toList(),
       'notifications': notifications?.map((x) => x?.toMap())?.toList(),
@@ -33,7 +33,7 @@ class SyncSendingData {
   
     return SyncSendingData(
       idToken: map['idToken'],
-      lastSync: DateTime.fromMillisecondsSinceEpoch(map['lastSync']),
+      lastSync: DateTime.parse(map['lastSync']),
       outgoings: List<OutgoingData>.from(map['outgoings']?.map((x) => OutgoingData.fromMap(x))),
       incomings: List<IncomingData>.from(map['incomings']?.map((x) => IncomingData.fromMap(x))),
       notifications: List<NotificationData>.from(map['notifications']?.map((x) => NotificationData.fromMap(x))),
@@ -59,7 +59,7 @@ class SyncReceivedData {
 
   Map<String, dynamic> toMap() {
     return {
-      'syncTime': syncTime?.millisecondsSinceEpoch,
+      'syncTime': syncTime?.toUtc()?.toIso8601String(),
       'outgoings': outgoings?.map((x) => x?.toMap())?.toList(),
       'incomings': incomings?.map((x) => x?.toMap())?.toList(),
       'notifications': notifications?.map((x) => x?.toMap())?.toList(),
@@ -70,7 +70,7 @@ class SyncReceivedData {
     if (map == null) return null;
   
     return SyncReceivedData(
-      syncTime: DateTime.fromMillisecondsSinceEpoch(map['syncTime']),
+      syncTime: DateTime.parse(map['syncTime']),
       outgoings: List<OutgoingData>.from(map['outgoings']?.map((x) => OutgoingData.fromMap(x))),
       incomings: List<IncomingData>.from(map['incomings']?.map((x) => IncomingData.fromMap(x))),
       notifications: List<NotificationData>.from(map['notifications']?.map((x) => NotificationData.fromMap(x))),

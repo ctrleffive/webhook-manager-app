@@ -28,7 +28,7 @@ class IncomingData {
       'id': id,
       'deleted': deleted ? 1 : 0,
       'eventName': eventName,
-      'updatedAt': updatedAt?.millisecondsSinceEpoch,
+      'updatedAt': updatedAt?.toUtc()?.toIso8601String(),
     };
   }
 
@@ -39,7 +39,7 @@ class IncomingData {
       id: map['id'],
       deleted: map['deleted'] == 1,
       eventName: map['eventName'],
-      updatedAt: DateTime.fromMillisecondsSinceEpoch(int.parse('${map['updatedAt']}')),
+      updatedAt: DateTime.parse(map['updatedAt']),
     );
   }
 
