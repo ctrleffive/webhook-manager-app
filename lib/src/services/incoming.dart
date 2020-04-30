@@ -5,6 +5,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:webhook_manager/src/models/incoming.dart';
 
 import 'package:webhook_manager/src/services/database.dart';
+import 'package:webhook_manager/src/services/sync.dart';
 
 class IncomingService {
   final DBService _dbService = DBService();
@@ -21,6 +22,19 @@ class IncomingService {
       return listData;
     } catch (e) {
       debugPrint(e);
+      return [];
+    }
+  }
+
+  Future<List<IncomingData>> get mutated async {
+    try {
+      final SyncService _syncService = SyncService();
+      final DateTime lastSync = await _syncService.lastSync;
+      final List<IncomingData> listData = (await this.all).where((IncomingData item) {
+        return item.updatedAt.isAfter(lastSync);
+      }).toList();
+      return listData;
+    } catch (e) {
       return [];
     }
   }

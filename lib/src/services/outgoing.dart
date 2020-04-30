@@ -8,6 +8,7 @@ import 'package:webhook_manager/src/models/outgoing.dart';
 
 import 'package:webhook_manager/src/services/database.dart';
 import 'package:webhook_manager/src/services/streams.dart';
+import 'package:webhook_manager/src/services/sync.dart';
 
 class OutgoingService {
   final DBService _dbService = DBService();
@@ -52,7 +53,7 @@ class OutgoingService {
     }
   }
 
-  Future<void> deleteItem(int id) async {
+  Future<void> deleteItem(String id) async {
     try {
       final Database dbClient = await this._dbService.db;
       await dbClient.delete(
@@ -63,6 +64,19 @@ class OutgoingService {
       StreamsService.outgoings.sink.add(await this.all);
     } catch (e) {
       rethrow;
+    }
+  }
+
+  Future<List<OutgoingData>> get mutated async {
+    try {
+      final SyncService _syncService = SyncService();
+      final DateTime lastSync = await _syncService.lastSync;
+      final List<OutgoingData> listData = (await this.all).where((OutgoingData item) {
+        return item.updatedAt.isAfter(lastSync);
+      }).toList();
+      return listData;
+    } catch (e) {
+      return [];
     }
   }
 

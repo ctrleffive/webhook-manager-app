@@ -24,4 +24,22 @@ class NotificationService {
       return [];
     }
   }
+
+  Future<List<NotificationData>> get deleted async {
+    try {
+      final Database dbClient = await this._dbService.db;
+      final List<Map> queryData = await dbClient.query(
+        NotificationData.tableName,
+        where: 'deleted = ?',
+        whereArgs: [1],
+      );
+      final List<NotificationData> listData = queryData.map((Map item) {
+        return NotificationData.fromMap(item);
+      }).toList();
+      return listData;
+    } catch (e) {
+      debugPrint(e);
+      return [];
+    }
+  }
 }
