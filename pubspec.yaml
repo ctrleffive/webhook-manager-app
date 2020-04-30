@@ -22,6 +22,7 @@ dependencies:
   google_fonts: ^0.5.0+1
   firebase_auth: ^0.16.0
   flutter_slidable: ^0.5.4
+  shared_preferences: ^0.5.7
   content_placeholder: ^0.1.0
   firebase_messaging: ^6.0.13
   # TODO: FCM Androd integration
