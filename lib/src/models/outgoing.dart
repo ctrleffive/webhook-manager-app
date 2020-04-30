@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:webhook_manager/src/constants/enums.dart';
 
 class OutgoingData {
+  int localId;
   String id;
   String eventName;
   String payload;
@@ -13,6 +14,7 @@ class OutgoingData {
   RequestMethod method;
   
   OutgoingData({
+    this.localId,
     this.id,
     this.eventName,
     this.payload,
@@ -26,7 +28,7 @@ class OutgoingData {
   static const String tableName = 'outgoing';
   static const String tableSchema = '''
     CREATE TABLE $tableName (
-      _id           INTEGER PRIMARY KEY,
+      localId       INTEGER PRIMARY KEY,
       id            TEXT,
       url           TEXT,
       deleted       INTEGER,
@@ -40,6 +42,7 @@ class OutgoingData {
 
   Map<String, dynamic> toMap() {
     return {
+      'localId': localId,
       'id': id,
       'eventName': eventName,
       'payload': payload,
@@ -55,6 +58,7 @@ class OutgoingData {
     if (map == null) return null;
   
     return OutgoingData(
+      localId: map['localId'],
       id: map['id'],
       eventName: map['eventName'],
       payload: map['payload'],

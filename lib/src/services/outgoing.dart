@@ -94,8 +94,8 @@ class OutgoingService {
           batch.update(
             OutgoingData.tableName,
             item.toMap(),
-            where: 'id = ?',
-            whereArgs: [item.id],
+            where: item.id == null ? 'localId = ?' : 'id = ?',
+            whereArgs: [item.id ?? item.localId],
           );
         } else {
           batch.insert(OutgoingData.tableName, item.toMap());

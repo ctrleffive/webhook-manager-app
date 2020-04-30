@@ -90,8 +90,8 @@ class IncomingService {
           batch.update(
             IncomingData.tableName,
             item.toMap(),
-            where: 'id = ?',
-            whereArgs: [item.id],
+            where: item.id == null ? 'localId = ?' : 'id = ?',
+            whereArgs: [item.id ?? item.localId],
           );
         } else {
           batch.insert(IncomingData.tableName, item.toMap());
