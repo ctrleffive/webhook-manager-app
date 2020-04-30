@@ -81,7 +81,7 @@ class IncomingService {
 
       for (final IncomingData item in data) {
         final IncomingData existingItem = allData.firstWhere(
-          (toCheck) => item.id == toCheck.id,
+          (toCheck) => item.eventName == toCheck.eventName,
           orElse: () => null,
         );
 
@@ -90,8 +90,8 @@ class IncomingService {
           batch.update(
             IncomingData.tableName,
             item.toMap(),
-            where: item.id == null ? 'localId = ?' : 'id = ?',
-            whereArgs: [item.id ?? item.localId],
+            where: 'eventName = ?',
+            whereArgs: [item.eventName],
           );
         } else {
           batch.insert(IncomingData.tableName, item.toMap());

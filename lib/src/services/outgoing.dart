@@ -58,7 +58,8 @@ class OutgoingService {
     try {
       final SyncService _syncService = SyncService();
       final DateTime lastSync = await _syncService.lastSync;
-      final List<OutgoingData> listData = (await this.all).where((OutgoingData item) {
+      final List<OutgoingData> listData =
+          (await this.all).where((OutgoingData item) {
         return item.updatedAt.isAfter(lastSync);
       }).toList();
       return listData;
@@ -70,7 +71,8 @@ class OutgoingService {
   Future<void> update(OutgoingData data) async {
     try {
       await this.updateMany([data]);
-      StreamsService.outgoings.sink.add(await this.all);
+      final SyncService _syncService = SyncService();
+      _syncService.init();
     } catch (e) {
       rethrow;
     }
@@ -85,7 +87,7 @@ class OutgoingService {
 
       for (final OutgoingData item in data) {
         final OutgoingData existingItem = allData.firstWhere(
-          (toCheck) => item.id == toCheck.id,
+          (toCheck) => item.eventName == toCheck.eventName,
           orElse: () => null,
         );
 
@@ -94,8 +96,8 @@ class OutgoingService {
           batch.update(
             OutgoingData.tableName,
             item.toMap(),
-            where: item.id == null ? 'localId = ?' : 'id = ?',
-            whereArgs: [item.id ?? item.localId],
+            where: 'eventName = ?',
+            whereArgs: [item.eventName],
           );
         } else {
           batch.insert(OutgoingData.tableName, item.toMap());
