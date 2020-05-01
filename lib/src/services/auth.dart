@@ -31,7 +31,7 @@ class AuthService {
       await this._firebaseAuth.signOut();
       await this._syncService.clearAll();
     } catch (e) {
-      throw Exception('Login failed!');
+      throw Exception('Logout failed!');
     } finally {
       StreamsService.loaderState.sink.add(false);
     }
