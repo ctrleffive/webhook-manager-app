@@ -83,17 +83,17 @@ class _DashPageState extends State<DashPage> {
         initialData: this._bottomNav.value,
         builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
           return Visibility(
-            visible: snapshot.data == 0 || snapshot.data == 2,
+            visible: snapshot.data == 1 || snapshot.data == 2,
             child: FloatingActionButton(
               child: Icon(Icons.add),
               onPressed: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (_) {
-                      if (snapshot.data == 0) {
-                        return OutgoingNew();
-                      } else {
+                      if (snapshot.data == 1) {
                         return IncomingNew();
+                      } else {
+                        return OutgoingNew();
                       }
                     },
                   ),
