@@ -5,12 +5,27 @@ import 'package:webhook_manager/src/constants/styles.dart';
 import 'package:webhook_manager/src/models/notification.dart';
 
 import 'package:webhook_manager/src/services/streams.dart';
+import 'package:webhook_manager/src/services/notification.dart';
 
 import 'package:webhook_manager/src/views/layouts/page_wrap.dart';
 
 import 'package:webhook_manager/src/views/components/notification_item.dart';
 
 class NotificationsPage extends StatelessWidget {
+  final NotificationService _service = NotificationService();
+
+  Future<void> _deleteItem(BuildContext context, NotificationData data) async {
+    try {
+      await this._service.deleteItem(data);
+    } catch (e) {
+      Scaffold.of(context).showSnackBar(
+        SnackBar(
+          backgroundColor: Colors.redAccent,
+          content: Text('Error deleting!'),
+        ),
+      );
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return PageWrap(
@@ -28,6 +43,7 @@ class NotificationsPage extends StatelessWidget {
             itemBuilder: (BuildContext context, int index) {
               return Dismissible(
                 key: Key('dis$index'),
+                onDismissed: (_) => this._deleteItem(context, snapshot.data[index]),
                 dismissThresholds: {
                   DismissDirection.endToStart: 0.8,
                 },

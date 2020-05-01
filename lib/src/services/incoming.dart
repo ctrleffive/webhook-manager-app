@@ -30,7 +30,8 @@ class IncomingService {
     try {
       data.deleted = true;
       await this.updateMany([data]);
-      StreamsService.incomings.sink.add(await this.all(all: true));
+      final SyncService _syncService = SyncService();
+      _syncService.init();
     } catch (e) {
       rethrow;
     }

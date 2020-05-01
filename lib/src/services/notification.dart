@@ -3,7 +3,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:webhook_manager/src/models/notification.dart';
 
 import 'package:webhook_manager/src/services/database.dart';
-import 'package:webhook_manager/src/services/streams.dart';
+import 'package:webhook_manager/src/services/sync.dart';
 
 class NotificationService {
   final DBService _dbService = DBService();
@@ -47,7 +47,8 @@ class NotificationService {
         where: 'id = ?',
         whereArgs: [data.id],
       );
-      StreamsService.notfcatns.sink.add(await this.all(all: true));
+      final SyncService _syncService = SyncService();
+      _syncService.init();
     } catch (e) {
       rethrow;
     }
