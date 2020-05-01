@@ -1,4 +1,5 @@
 class KeysConstant {
+  static final String gravatarApi = 'https://www.gravatar.com/avatar';
   static String sentryDsn =
       'https://ad70a9bbe38445edb85d10edc88ec903@sentry.io/1847893';
   static String api = 'https://webhook-manager.chandujs.dev/api';
