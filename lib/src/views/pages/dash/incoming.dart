@@ -6,6 +6,7 @@ import 'package:webhook_manager/src/services/streams.dart';
 
 import 'package:webhook_manager/src/views/layouts/page_wrap.dart';
 
+import 'package:webhook_manager/src/views/components/incoming_item.dart';
 import 'package:webhook_manager/src/views/components/empty_list_view.dart';
 
 class IncomingPage extends StatelessWidget {
@@ -19,15 +20,15 @@ class IncomingPage extends StatelessWidget {
         stream: StreamsService.incomings,
         initialData: StreamsService.incomings.value,
         builder: (_, AsyncSnapshot<List<IncomingData>> snapshot) {
-          return EmptyListView();
-          // return ListView.builder(
-          //   shrinkWrap: true,
-          //   physics: NeverScrollableScrollPhysics(),
-          //   itemCount: snapshot.data.length,
-          //   itemBuilder: (BuildContext context, int index) {
-          //     return IncomingItem(snapshot.data[index]);
-          //   },
-          // );
+          if (snapshot.data.isEmpty) return EmptyListView();
+          return ListView.builder(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            itemCount: snapshot.data.length,
+            itemBuilder: (BuildContext context, int index) {
+              return IncomingItem(snapshot.data[index]);
+            },
+          );
         },
       ),
     );

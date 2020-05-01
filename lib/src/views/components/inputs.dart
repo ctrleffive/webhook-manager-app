@@ -4,6 +4,7 @@ import 'package:webhook_manager/src/constants/styles.dart';
 
 class TextInput extends StatefulWidget {
   final int lines;
+  final bool readOnly;
   final String label;
   final String placeholder;
   final String initialValue;
@@ -16,6 +17,7 @@ class TextInput extends StatefulWidget {
     this.label = 'Input Label',
     this.lines = 1,
     this.onSave,
+    this.readOnly = false,
     this.onChange,
     this.validator,
     this.placeholder,
@@ -43,6 +45,7 @@ class _TextInputState extends State<TextInput> {
       child: Padding(
         padding: EdgeInsets.fromLTRB(3, 10, 3, 10),
         child: TextFormField(
+          readOnly: this.widget.readOnly,
           controller: this._controller,
           minLines: this.widget.lines,
           maxLines: this.widget.lines,

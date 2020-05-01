@@ -98,7 +98,6 @@ class IncomingService {
             whereArgs: [item.eventName],
           );
         } else {
-          item.hookId = DateTime.now().millisecondsSinceEpoch.toString();
           batch.insert(IncomingData.tableName, item.toMap());
         }
       }
