@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:webhook_manager/src/services/streams.dart';
+import 'package:webhook_manager/src/services/sync.dart';
 
 import 'package:webhook_manager/src/views/components/app_title.dart';
 
@@ -13,24 +14,28 @@ class PageWrap extends StatelessWidget {
   final bool isCentered;
   final PageView pageView;
   final Widget bottomNav;
+  final bool syncNeeded;
   final Widget floatingActionButton;
 
-  const PageWrap({
+  PageWrap({
     Key key,
     this.icon,
     this.title,
     this.child,
     this.children,
     this.pageView,
+    this.syncNeeded = false,
     this.isCentered = false,
     this.noLoader = false,
     this.bottomNav,
     this.floatingActionButton,
   }) : super(key: key);
 
+  final SyncService _syncService = SyncService();
+
   @override
   Widget build(BuildContext context) {
-    return Stack(
+    final Widget everything = Stack(
       children: <Widget>[
         Scaffold(
           body: SafeArea(
@@ -38,6 +43,8 @@ class PageWrap extends StatelessWidget {
               builder: (BuildContext context, BoxConstraints constraints) {
                 if (this.pageView != null) return this.pageView;
                 return SingleChildScrollView(
+                  physics:
+                      this.syncNeeded ? AlwaysScrollableScrollPhysics() : null,
                   child: ConstrainedBox(
                     constraints: BoxConstraints(
                       minHeight: constraints.maxHeight,
@@ -62,7 +69,9 @@ class PageWrap extends StatelessWidget {
                             );
                           }
                           return Column(
-                            mainAxisAlignment: this.isCentered ? MainAxisAlignment.spaceBetween : MainAxisAlignment.start,
+                            mainAxisAlignment: this.isCentered
+                                ? MainAxisAlignment.spaceBetween
+                                : MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: newChildren,
                           );
@@ -100,5 +109,12 @@ class PageWrap extends StatelessWidget {
           ),
       ],
     );
+    if (this.syncNeeded) {
+      return RefreshIndicator(
+        onRefresh: this._syncService.init,
+        child: everything,
+      );
+    }
+    return everything;
   }
 }

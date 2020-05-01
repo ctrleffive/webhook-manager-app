@@ -32,6 +32,7 @@ class NotificationsPage extends StatelessWidget {
       icon: Icons.notifications_active,
       title: 'Notifications',
       noLoader: true,
+      syncNeeded: true,
       child: StreamBuilder<List<NotificationData>>(
         stream: StreamsService.notfcatns,
         initialData: StreamsService.notfcatns.value,
@@ -42,7 +43,7 @@ class NotificationsPage extends StatelessWidget {
             itemCount: snapshot.data.length,
             itemBuilder: (BuildContext context, int index) {
               return Dismissible(
-                key: Key('dis$index'),
+                key: UniqueKey(),
                 onDismissed: (_) => this._deleteItem(context, snapshot.data[index]),
                 dismissThresholds: {
                   DismissDirection.endToStart: 0.8,

@@ -16,6 +16,7 @@ class IncomingPage extends StatelessWidget {
       icon: Icons.cloud_download,
       title: 'Incoming',
       noLoader: true,
+      syncNeeded: true,
       child: StreamBuilder<List<IncomingData>>(
         stream: StreamsService.incomings,
         initialData: StreamsService.incomings.value,

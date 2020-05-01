@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:webhook_manager/src/services/sync.dart';
 import 'package:webhook_manager/src/services/auth.dart';
 import 'package:webhook_manager/src/services/settings.dart';
 
@@ -12,7 +11,6 @@ import 'package:webhook_manager/src/views/components/button.dart';
 
 class SettingsPage extends StatelessWidget {
   final AuthService _authService = AuthService();
-  final SyncService _syncService = SyncService();
   final SettingsService _service = SettingsService();
 
   Future<void> _signOut(BuildContext context) async {
@@ -31,6 +29,7 @@ class SettingsPage extends StatelessWidget {
       icon: Icons.settings,
       title: 'Settings',
       noLoader: true,
+      syncNeeded: true,
       children: <Widget>[
         Button(
           isBlock: true,
@@ -43,13 +42,6 @@ class SettingsPage extends StatelessWidget {
           color: Colors.redAccent,
           label: 'Clear DB',
           onTap: this._service.clearDb,
-        ),
-        Button(
-          isBlock: true,
-          isFlat: true,
-          color: Colors.blueAccent,
-          label: 'Sync',
-          onTap: this._syncService.init,
         ),
       ],
     );

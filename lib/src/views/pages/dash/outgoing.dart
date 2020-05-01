@@ -16,6 +16,7 @@ class OutgoingPage extends StatelessWidget {
       icon: Icons.cloud_upload,
       title: 'Outgoing',
       noLoader: true,
+      syncNeeded: true,
       child: StreamBuilder<List<OutgoingData>>(
         stream: StreamsService.outgoings,
         initialData: StreamsService.outgoings.value,

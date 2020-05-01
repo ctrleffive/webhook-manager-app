@@ -4,5 +4,5 @@ enum RequestMethod {
   post,
   patch,
   delete,
-  option,
+  options,
 }
