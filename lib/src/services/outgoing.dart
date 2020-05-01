@@ -19,7 +19,7 @@ class OutgoingService {
       final List<Map> queryData = await dbClient.query(
         OutgoingData.tableName,
         where: all ? null : 'deleted = ?',
-        whereArgs: [0],
+        whereArgs: all ? null : [0],
       );
       final List<OutgoingData> listData = queryData.map((Map item) {
         return OutgoingData.fromMap(item);

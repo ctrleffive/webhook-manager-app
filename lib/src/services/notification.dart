@@ -14,7 +14,7 @@ class NotificationService {
       final List<Map> queryData = await dbClient.query(
         NotificationData.tableName,
         where: all ? null : 'deleted = ?',
-        whereArgs: [0],
+        whereArgs: all ? null : [0],
       );
       final List<NotificationData> listData = queryData.map((Map item) {
         return NotificationData.fromMap(item);
