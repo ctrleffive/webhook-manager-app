@@ -9,6 +9,8 @@ import 'package:webhook_manager/src/services/notification.dart';
 
 import 'package:webhook_manager/src/views/layouts/page_wrap.dart';
 
+import 'package:webhook_manager/src/views/pages/notification_single.dart';
+
 import 'package:webhook_manager/src/views/components/notification_item.dart';
 
 class NotificationsPage extends StatelessWidget {
@@ -26,6 +28,13 @@ class NotificationsPage extends StatelessWidget {
       );
     }
   }
+
+  Future<void> _goToDetails(BuildContext context, NotificationData data) async {
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (_) => NotificationSingle(data),
+    ));
+  }
+
   @override
   Widget build(BuildContext context) {
     return PageWrap(
@@ -44,7 +53,8 @@ class NotificationsPage extends StatelessWidget {
             itemBuilder: (BuildContext context, int index) {
               return Dismissible(
                 key: UniqueKey(),
-                onDismissed: (_) => this._deleteItem(context, snapshot.data[index]),
+                onDismissed: (_) =>
+                    this._deleteItem(context, snapshot.data[index]),
                 dismissThresholds: {
                   DismissDirection.endToStart: 0.8,
                 },
@@ -72,7 +82,10 @@ class NotificationsPage extends StatelessWidget {
                   ),
                 ),
                 direction: DismissDirection.endToStart,
-                child: NotificationItem(snapshot.data[index]),
+                child: GestureDetector(
+                  onTap: () => this._goToDetails(context, snapshot.data[index]),
+                  child: NotificationItem(snapshot.data[index]),
+                ),
               );
             },
           );

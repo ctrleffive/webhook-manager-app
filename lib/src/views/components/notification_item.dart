@@ -12,8 +12,13 @@ import 'package:webhook_manager/src/views/components/method_label.dart';
 
 class NotificationItem extends StatelessWidget {
   final NotificationData data;
+  final bool minmal;
 
-  NotificationItem(this.data, {Key key}) : super(key: key);
+  NotificationItem(
+    this.data, {
+    Key key,
+    this.minmal = false,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +67,7 @@ class NotificationItem extends StatelessWidget {
               ],
             ),
           ),
-          if (this.data.payload != null)
+          if (!this.minmal && this.data.payload != null)
             Container(
               width: MediaQuery.of(context).size.width,
               padding: EdgeInsets.all(20),
