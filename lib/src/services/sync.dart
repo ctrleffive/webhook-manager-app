@@ -78,6 +78,8 @@ class SyncService {
       await dbClient.delete(OutgoingData.tableName);
       await dbClient.delete(IncomingData.tableName);
       await dbClient.delete(NotificationData.tableName);
+      final SharedPreferences pref = await SharedPreferences.getInstance();
+      await pref.clear();
     } catch (e) {
       rethrow;
     }
