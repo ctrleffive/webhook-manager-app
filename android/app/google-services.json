@@ -15,7 +15,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "828807375521-sqp0pn44naaj5bmgmp2m87nm384hm2dl.apps.googleusercontent.com",
+          "client_id": "828807375521-0jplhaorsn8n89mg2g7re7gktg27fr8o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "dev.chandujs.webhookmanager",
+            "certificate_hash": "11a7282e6e8fa93512a365e0803cd548c9257f94"
+          }
+        },
+        {
+          "client_id": "828807375521-l0f7ui97mpgeqm916ph05vvh48o1gepq.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "dev.chandujs.webhookmanager",

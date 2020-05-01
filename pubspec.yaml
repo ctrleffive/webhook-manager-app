@@ -25,7 +25,6 @@ dependencies:
   shared_preferences: ^0.5.7
   content_placeholder: ^0.1.0
   firebase_messaging: ^6.0.13
-  # TODO: FCM Androd integration
   # TODO: FCM iOS integration
 
 flutter:
