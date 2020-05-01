@@ -4,10 +4,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:webhook_manager/src/models/user.dart';
 
+import 'package:webhook_manager/src/services/sync.dart';
 import 'package:webhook_manager/src/services/streams.dart';
 
 class AuthService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final SyncService _syncService = SyncService();
 
   Future<FirebaseUser> get session async {
     final FirebaseUser user = await this._firebaseAuth.currentUser();
@@ -25,9 +27,13 @@ class AuthService {
 
   Future<void> signOut() async {
     try {
+      StreamsService.loaderState.sink.add(true);
       await this._firebaseAuth.signOut();
+      await this._syncService.clearAll();
     } catch (e) {
       throw Exception('Login failed!');
+    } finally {
+      StreamsService.loaderState.sink.add(false);
     }
   }
 

@@ -1,17 +1,23 @@
 import 'package:http/http.dart';
+import 'package:sqflite/sqflite.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:webhook_manager/src/constants/keys.dart';
+import 'package:webhook_manager/src/models/incoming.dart';
+import 'package:webhook_manager/src/models/notification.dart';
+import 'package:webhook_manager/src/models/outgoing.dart';
 
 import 'package:webhook_manager/src/models/sync.dart';
 
 import 'package:webhook_manager/src/services/auth.dart';
+import 'package:webhook_manager/src/services/database.dart';
 import 'package:webhook_manager/src/services/streams.dart';
 import 'package:webhook_manager/src/services/incoming.dart';
 import 'package:webhook_manager/src/services/outgoing.dart';
 import 'package:webhook_manager/src/services/notification.dart';
 
 class SyncService {
+  final DBService _dbService = DBService();
   final NotificationService _notfictnSrv = NotificationService();
   final OutgoingService _outgoingSrv = OutgoingService();
   final IncomingService _incomingSrv = IncomingService();
@@ -61,6 +67,17 @@ class SyncService {
       await this._notfictnSrv.clearDeleted();
       await this._outgoingSrv.clearDeleted();
       await this._incomingSrv.clearDeleted();
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> clearAll() async {
+    try {
+      final Database dbClient = await this._dbService.db;
+      await dbClient.delete(OutgoingData.tableName);
+      await dbClient.delete(IncomingData.tableName);
+      await dbClient.delete(NotificationData.tableName);
     } catch (e) {
       rethrow;
     }
