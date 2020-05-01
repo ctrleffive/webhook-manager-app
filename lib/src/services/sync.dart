@@ -84,6 +84,10 @@ class SyncService {
   }
 
   Future<void> _serverSync() async {
+    if (StreamsService.syncState.value) {
+      await Future.delayed(Duration(seconds: 2));
+      return await this._serverSync();
+    }
     try {
       StreamsService.syncState.sink.add(true);
       final AuthService _authService = AuthService();
