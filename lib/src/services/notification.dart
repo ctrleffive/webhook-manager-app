@@ -68,11 +68,27 @@ class NotificationService {
 
   Future<void> addMany(List<NotificationData> data) async {
     try {
+      final List<NotificationData> allData = await this.all(all: true);
+
       final Database dbClient = await this._dbService.db;
       final Batch batch = dbClient.batch();
 
       for (final NotificationData item in data) {
-        batch.insert(NotificationData.tableName, item.toMap());
+        final NotificationData existingItem = allData.firstWhere(
+          (toCheck) => item.id == toCheck.id,
+          orElse: () => null,
+        );
+
+        if (existingItem != null) {
+          batch.update(
+            NotificationData.tableName,
+            item.toMap(),
+            where: 'id = ?',
+            whereArgs: [item.id],
+          );
+        } else {
+          batch.insert(NotificationData.tableName, item.toMap());
+        }
       }
 
       await batch.commit();
