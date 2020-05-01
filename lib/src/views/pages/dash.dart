@@ -72,9 +72,9 @@ class _DashPageState extends State<DashPage> {
         controller: this._pageController,
         onPageChanged: this._bottomNav.sink.add,
         children: <Widget>[
-          OutgoingPage(),
           NotificationsPage(),
           IncomingPage(),
+          OutgoingPage(),
           SettingsPage(),
         ],
       ),
@@ -122,16 +122,16 @@ class _DashPageState extends State<DashPage> {
             onTap: this._animatePage,
             items: [
               BottomNavigationBarItem(
-                icon: Icon(Icons.cloud_upload),
-                title: Text('Outgoing'),
-              ),
-              BottomNavigationBarItem(
                 icon: Icon(Icons.notifications_active),
                 title: Text('Notifications'),
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.cloud_download),
                 title: Text('Incoming'),
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.cloud_upload),
+                title: Text('Outgoing'),
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.settings),
