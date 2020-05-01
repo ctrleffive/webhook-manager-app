@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
 import 'package:catcher/core/catcher.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:webhook_manager/src/constants/styles.dart';
+import 'package:webhook_manager/src/services/fcm.dart';
 
 import 'package:webhook_manager/src/services/sync.dart';
 import 'package:webhook_manager/src/services/auth.dart';
@@ -44,14 +46,13 @@ class _Content extends StatefulWidget {
 
 class __ContentState extends State<_Content> {
   final AuthService _service = AuthService();
-  final SyncService _syncService = SyncService();
 
   Future<void> checkSession(Duration duration) async {
-    final bool sessionStatus = await this._service.session;
+    final FirebaseUser session = await this._service.session;
     Navigator.of(context).pushAndRemoveUntil(
       PageRouteBuilder(
         pageBuilder: (BuildContext context, _, __) {
-          return sessionStatus ? DashPage() : WelcomePage();
+          return session != null ? DashPage() : WelcomePage();
         },
         transitionsBuilder: (_, Animation<double> animation, __, Widget child) {
           return new FadeTransition(
@@ -63,7 +64,6 @@ class __ContentState extends State<_Content> {
       (_) => false,
     );
     StreamsService.loaderState.sink.add(false);
-    this._syncService.init();
   }
 
   @override

@@ -9,10 +9,10 @@ import 'package:webhook_manager/src/services/streams.dart';
 class AuthService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
-  Future<bool> get session async {
+  Future<FirebaseUser> get session async {
     final FirebaseUser user = await this._firebaseAuth.currentUser();
     StreamsService.sessionUser.sink.add(user);
-    return user != null;
+    return user;
   }
 
   Future<String> get token async {

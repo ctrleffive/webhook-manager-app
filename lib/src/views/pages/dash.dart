@@ -1,9 +1,14 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 
 import 'package:rxdart/subjects.dart';
 
 import 'package:webhook_manager/src/constants/styles.dart';
+import 'package:webhook_manager/src/services/auth.dart';
 
+import 'package:webhook_manager/src/services/fcm.dart';
+import 'package:webhook_manager/src/services/sync.dart';
 import 'package:webhook_manager/src/services/streams.dart';
 
 import 'package:webhook_manager/src/views/layouts/page_wrap.dart';
@@ -27,6 +32,9 @@ class _DashPageState extends State<DashPage> {
   final PageController _pageController = PageController(
     initialPage: initialPage,
   );
+  final AuthService _authService = AuthService();
+  final SyncService _syncService = SyncService();
+  final FCMService _fcmService = FCMService();
 
   void _animatePage(int index) {
     this._pageController.animateToPage(
@@ -36,9 +44,18 @@ class _DashPageState extends State<DashPage> {
         );
   }
 
+  Future<void> _initRegistration(Duration duration) async {
+    final FirebaseUser session = await this._authService.session;
+    if (session != null && !session.isAnonymous) {
+      this._fcmService.register();
+    }
+    this._syncService.init(noSync: session.isAnonymous);
+  }
+
   @override
   void initState() {
     StreamsService.loaderState.sink.add(false);
+    SchedulerBinding.instance.addPostFrameCallback(this._initRegistration);
     super.initState();
   }
 

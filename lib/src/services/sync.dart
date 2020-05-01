@@ -16,10 +16,10 @@ class SyncService {
   final OutgoingService _outgoingSrv = OutgoingService();
   final IncomingService _incomingSrv = IncomingService();
 
-  Future<void> init({bool repeat = false}) async {
+  Future<void> init({bool noSync = false}) async {
     try {
       await this._fetchLocal();
-      this._serverSync();
+      if (!noSync) this._serverSync();
     } catch (e) {
       rethrow;
     }
